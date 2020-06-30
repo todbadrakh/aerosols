@@ -1,0 +1,17 @@
+#!/bin/tcsh
+#PBS -q __QUEUE__
+#PBS -l mem=14gb
+#PBS -l nodes=1:ppn=8
+#PBS -l walltime=48:00:00
+#PBS -j oe
+#PBS -e __NAME__
+#PBS -N __NAME__
+#PBS -V
+
+source ~/.login
+
+module load g16/B01
+
+set echo
+cd $PBS_O_WORKDIR
+
