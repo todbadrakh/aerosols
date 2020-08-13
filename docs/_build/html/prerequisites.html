@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduction &#8212; aerosols 0.0.1 documentation</title>
+    <title>Prerequisites &#8212; aerosols 0.0.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -16,7 +16,9 @@
     <script src="_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Protocol" href="protocol.html" />
+    <link rel="prev" title="Introduction" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -24,8 +26,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="protocol.html" title="Protocol"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.0.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Introduction</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Prerequisites</a></li> 
       </ul>
     </div>  
 
@@ -34,33 +42,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<p>This page describes the computational methodology used in the
-<a class="reference external" href="https://www.furman.edu/people/george-c-shields">Shields</a> Lab to compute
-the thermodynamic properties of atmospheric prenucleation clusters, which are the
-precursors to atmospheric aerosols. A recent review on the topic can be found in
-<a class="reference external" href="https://onlinelibrary.wiley.com/doi/full/10.1002/qua.26350">Leonardi, A. IJQC 2020</a>.
-A detailed description of the process of identifying candidate
-prenucleation clusters can be found in
-<a class="reference external" href="https://www.jove.com/t/60964/computation-atmospheric-concentrations-molecular-clusters-from-ab">Odbadrakh, T. T. JoVE 2020</a>.
-Here, we present a step-by-step application of our methodology as implemented on the
-<a class="reference external" href="https://mercuryconsortium.org">MERCURY Consortium</a>’s high-performance computing (HPC) clusters.</p>
-<p>Our ultimate goal is to compute the Gibbs free energy change associated with the
-formation of gas-phase molecular clusters. This information can be used to calculate
-how much of a particular molecule ends up suspended in the atmosphere as aerosols.
-In order to calculate the energy of a cluster, we need to know its geometry. The
-process of identifying the stable geometries of a cluster is called configurational
-sampling and is the first step of our methodology. We will use a genetic
-algorithm-based configurational sampling (GA) method. The set of cluster geometries
-identified through the GA method will then be refined through a series of screening
-calculations, resulting in a final set of low-energy clusters which represent the
-possible shapes/geometries of the given molecular clusters that we can expect our
-cluster to naturally be in. Finally, the thermodynamic properties of this set of
-possible clusters are calculated at a high level of accuracy to produce meaningful
-data.</p>
-</div>
-<div class="section" id="prerequisites">
+  <div class="section" id="prerequisites">
 <h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
 <p>This protocol is built around a collection of Linux shell scripts which handle the
 setup and submission of the necessary computations. The protocol also requires a
@@ -79,12 +61,16 @@ calculations <code class="docutils literal notranslate"><span class="pre">$DIR/Q
 Finally, the MG3S directory should contain a final frequency calculation directory called
 <code class="docutils literal notranslate"><span class="pre">$DIR/QM/m08hx-mg3s/ultrafine</span></code>. The <code class="docutils literal notranslate"><span class="pre">tree</span></code> command can be used to check the directory
 structure, which should produce the following output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd $DIR
+$ tree .
+.
 ├── GA
 └── QM
     ├── m08hx-mg3s
     │   └── ultrafine
     └── m08hx-sb
+
+5 directories, 0 files
 </pre></div>
 </div>
 </div>
@@ -123,30 +109,23 @@ constants.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">run-thermo.sh</span></code></dt><dd><p>calculates and prints the formation energies of the cluster.</p>
 </dd>
 </dl>
+<div class="toctree-wrapper compound">
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programs">Programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-scripts">Custom Scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="protocol.html#step-1-genetic-algorithm-based-configurational-sampling">Step 1. Genetic Algorithm-Based Configurational Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol.html#step-2-rough-quantum-mechanical-geometry-refinement">Step 2. Rough Quantum Mechanical Geometry Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol.html#step-3-detailed-quantum-mechanical-geometry-refinement">Step 3. Detailed Quantum Mechanical Geometry Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol.html#step-4-calculation-of-thermodynamic-quantities">Step 4. Calculation of Thermodynamic Quantities</a></li>
+</ul>
+</li>
+</ul>
 </div>
-</div>
-<div class="section" id="protocol">
-<h1>Protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">¶</a></h1>
-<p>The best way to describe the protocol in detail is to work through an example case. Therefore,
-we will use singly-hydrated glycine as our working example and determine the concentrations and
-geometries of the most common singly-hydrated glycine clusters in the atmosphere.</p>
-<div class="section" id="step-1-genetic-algorithm-based-configurational-sampling">
-<h2>Step 1. Genetic Algorithm-Based Configurational Sampling<a class="headerlink" href="#step-1-genetic-algorithm-based-configurational-sampling" title="Permalink to this headline">¶</a></h2>
-<p>The goal here is to obtain a list of configurations, and their associated <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> files. To
-do this, we must first obtain the optimized geometries of the</p>
-<p>Set up the required directories:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">GA</span> <span class="n">QM</span> <span class="n">QM</span><span class="o">/</span><span class="n">m08hx</span><span class="o">-</span><span class="n">sb</span> <span class="n">QM</span><span class="o">/</span><span class="n">m08hx</span><span class="o">-</span><span class="n">mg3s</span> <span class="n">QM</span><span class="o">/</span><span class="n">m08hx</span><span class="o">-</span><span class="n">mg3s</span><span class="o">/</span><span class="n">ultrafine</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="step-2-rough-quantum-mechanical-geometry-refinement">
-<h2>Step 2. Rough Quantum Mechanical Geometry Refinement<a class="headerlink" href="#step-2-rough-quantum-mechanical-geometry-refinement" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="step-3-detailed-quantum-mechanical-geometry-refinement">
-<h2>Step 3. Detailed Quantum Mechanical Geometry Refinement<a class="headerlink" href="#step-3-detailed-quantum-mechanical-geometry-refinement" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="step-4-calculation-of-thermodynamic-quantities">
-<h2>Step 4. Calculation of Thermodynamic Quantities<a class="headerlink" href="#step-4-calculation-of-thermodynamic-quantities" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -159,26 +138,24 @@ do this, we must first obtain the optimized geometries of the</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Introduction</a></li>
-<li><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li><a class="reference internal" href="#">Prerequisites</a><ul>
 <li><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
 <li><a class="reference internal" href="#programs">Programs</a></li>
 <li><a class="reference internal" href="#custom-scripts">Custom Scripts</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#protocol">Protocol</a><ul>
-<li><a class="reference internal" href="#step-1-genetic-algorithm-based-configurational-sampling">Step 1. Genetic Algorithm-Based Configurational Sampling</a></li>
-<li><a class="reference internal" href="#step-2-rough-quantum-mechanical-geometry-refinement">Step 2. Rough Quantum Mechanical Geometry Refinement</a></li>
-<li><a class="reference internal" href="#step-3-detailed-quantum-mechanical-geometry-refinement">Step 3. Detailed Quantum Mechanical Geometry Refinement</a></li>
-<li><a class="reference internal" href="#step-4-calculation-of-thermodynamic-quantities">Step 4. Calculation of Thermodynamic Quantities</a></li>
-</ul>
-</li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="protocol.html"
+                        title="next chapter">Protocol</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/contents.rst.txt"
+      <li><a href="_sources/prerequisites.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -202,8 +179,14 @@ do this, we must first obtain the optimized geometries of the</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="protocol.html" title="Protocol"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Introduction"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.0.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Introduction</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Prerequisites</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

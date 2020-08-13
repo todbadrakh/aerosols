@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol &#8212; aerosols 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Prerequisites" href="prerequisites.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="prerequisites.html" title="Prerequisites"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="prerequisites.html" accesskey="U">Prerequisites</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Protocol</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="protocol">
+<h1>Protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">¶</a></h1>
+<p>The best way to describe the protocol in detail is to work through an example case. Therefore,
+we will use singly-hydrated glycine as our working example and determine the concentrations and
+geometries of the most common singly-hydrated glycine clusters in the atmosphere.</p>
+<div class="section" id="step-1-genetic-algorithm-based-configurational-sampling">
+<h2>Step 1. Genetic Algorithm-Based Configurational Sampling<a class="headerlink" href="#step-1-genetic-algorithm-based-configurational-sampling" title="Permalink to this headline">¶</a></h2>
+<p>The goal here is to obtain a list of configurations, and their associated <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> files. To
+do this, we must first obtain the optimized geometries of the water molecule and the glycine
+molecule.</p>
+<p>Set up the required directories:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mkdir -p GA QM QM/m08hx-sb QM/m08hx-mg3s QM/m08hx-mg3s/ultrafine
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-2-rough-quantum-mechanical-geometry-refinement">
+<h2>Step 2. Rough Quantum Mechanical Geometry Refinement<a class="headerlink" href="#step-2-rough-quantum-mechanical-geometry-refinement" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="step-3-detailed-quantum-mechanical-geometry-refinement">
+<h2>Step 3. Detailed Quantum Mechanical Geometry Refinement<a class="headerlink" href="#step-3-detailed-quantum-mechanical-geometry-refinement" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="step-4-calculation-of-thermodynamic-quantities">
+<h2>Step 4. Calculation of Thermodynamic Quantities<a class="headerlink" href="#step-4-calculation-of-thermodynamic-quantities" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Protocol</a><ul>
+<li><a class="reference internal" href="#step-1-genetic-algorithm-based-configurational-sampling">Step 1. Genetic Algorithm-Based Configurational Sampling</a></li>
+<li><a class="reference internal" href="#step-2-rough-quantum-mechanical-geometry-refinement">Step 2. Rough Quantum Mechanical Geometry Refinement</a></li>
+<li><a class="reference internal" href="#step-3-detailed-quantum-mechanical-geometry-refinement">Step 3. Detailed Quantum Mechanical Geometry Refinement</a></li>
+<li><a class="reference internal" href="#step-4-calculation-of-thermodynamic-quantities">Step 4. Calculation of Thermodynamic Quantities</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="prerequisites.html"
+                        title="previous chapter">Prerequisites</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/protocol.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="prerequisites.html" title="Prerequisites"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="prerequisites.html" >Prerequisites</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Protocol</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Tuguldur T. Odbadrakh.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>
