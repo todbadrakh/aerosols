@@ -215,4 +215,5 @@ DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory.
 
 .. toctree::
    :maxdepth: 2
+   :caption: Table of Contents
    :hidden:
