@@ -104,17 +104,17 @@ where ``_METHOD_``, ``_BASIS_``, ``_NUMBER_OF_PROCESSORS_``, and ``_ATOMIC_COORD
 the user. The unique lines of each template input file are as follows:
 
 .. code-block:: none
-   :caption: dlpno-ccsdt.inp
+   :caption: dlpno-ccsdt-avxz.inp
 
    ! DLPNO-CCSD(T) aug-cc-pV_X_Z aug-cc-pV_X_Z/C VeryTightSCF
 
 .. code-block:: none
-   :caption: dlpno-ccsdt-f12.inp
+   :caption: dlpno-ccsdt-f12-vxz.inp
 
    ! DLPNO-CCSD(T)-F12 cc-pV_X_Z-F12 cc-pV_X_Z-F12-CABS cc-pV_X_Z/C VeryTightSCF
 
 .. code-block:: none
-   :caption: ri-mp2-f12.inp
+   :caption: ri-mp2-f12-vxz.inp
 
    ! F12-RI-MP2 cc-pV_X_Z-F12 cc-pV_X_Z-F12-CABS cc-pV_X_Z/C VeryTightSCF
 
