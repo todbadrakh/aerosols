@@ -8,7 +8,8 @@ particular directory structure to ensure that the shell scripts find the files t
 need. The shell scripts call on OGOLEM to carry out the configurational sampling 
 step. The resulting set of cluster geometries are then refined using Gaussian 16. 
 Finally, an in-house version of the THERMO script from NIST is used to compute and 
-print the final thermodynamic data.
+print the final thermodynamic data. For MERCURY HPC users, all prerequisites have
+been met on the HPC cluster.
 
 Directory Structure
 -------------------
@@ -21,7 +22,7 @@ Finally, the MG3S directory should contain a final frequency calculation directo
 ``$DIR/QM/m08hx-mg3s/ultrafine``. The ``tree`` command can be used to check the directory
 structure, which should produce the following output:
 
-.. code-block:: console
+.. code-block:: bash
 
    $ cd $DIR
    $ tree .
@@ -50,30 +51,37 @@ Programs
 
 Shell Scripts
 -------------
+
 ``run-ogolem.csh <input file> <number of processors>``
-    starts an OGOLEM calculation when given a .ogo file.
+    starts an OGOLEM calculation when given a ``.ogo`` file.
 
-``run-m08hx-sb.csh``
-    starts a set of M08-HX/6-31+G* geometry optimizations when given a .data file.
+``run-m08hx-sb.csh <input file> <job name> <queue> <number of jobs/batch>``
+    starts a set of M08-HX/6-31+G* geometry optimizations when given a ``.data`` file.
 
-``run-m08hx-mg3s.csh``
-    starts a set of M08-HX/MG3S geometry optimizations when given a .data file.
+``run-m08hx-mg3s.csh <input file> <job name> <queue> <number of jobs/batch>``
+    starts a set of M08-HX/MG3S geometry optimizations when given a ``.data`` file.
 
-``run-m08hx-mg3s-ultrafine.csh``
-    starts a set of vibrational frequency calculations when given a .data file.
+``run-m08hx-mg3s-ultrafine.csh <input file> <job name> <queue> <number of jobs/batch>``
+    starts a set of vibrational frequency calculations when given a ``.data`` file.
 
-``getRotConsts-GA.csh``
+``getRotConsts-GA.csh <number of atoms> <min rank> <max rank>``
     generates a sorted list of rotational constants from OGOLEM output.
 
-``getRotConsts-dft.csh``
-    generates a sorted list of rotational constants from Gaussian 16 output.
+``getRotConsts-dft-sb.csh <functional> <number of atoms>``
+    generates a sorted list of small basis DFT rotational constants from Gaussian 16 output.
 
-``SimilarityAnalysis.py``
+``getRotConsts-dft-lb.csh <functional> <number of atoms>``
+    generates a sorted list of large basis DFT rotational constants from Gaussian 16 output.
+
+``getRotConsts-dft-lb-ultrafine.csh <functional> <number of atoms>``
+    generates a sorted list of final DFT rotational constants from Gaussian 16 output.
+
+``SimilarityAnalysis.py <tag> <input file>``
     generates a sorted list of unique structures from comparing energies and rotational 
-    constants.
+    constants when given a ``rotConstsData_C`` file.
 
-``run-thermo.sh``
-    calculates and prints the formation energies of the cluster.
+``run-thermo.sh <input file>``
+    calculates and prints the formation energies of the cluster given a ``.data`` file.
 
 .. toctree::
    :maxdepth: 2

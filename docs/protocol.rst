@@ -11,9 +11,20 @@ The goal here is to obtain a list of configurations, and their associated ``.xyz
 do this, we must first obtain the optimized geometries of the water molecule and the glycine
 molecule.
 
-Set up the required directories::
+Set up the required directories:
 
-    $ mkdir -p GA QM QM/m08hx-sb QM/m08hx-mg3s QM/m08hx-mg3s/ultrafine
+.. code-block:: bash
+
+   $ mkdir -p GA QM QM/m08hx-sb QM/m08hx-mg3s QM/m08hx-mg3s/ultrafine
+   $ tree .
+   .
+   ├── GA
+   └── QM
+       ├── m08hx-mg3s
+       │   └── ultrafine
+       └── m08hx-sb
+   
+   5 directories, 0 files
 
 Step 2. Rough Quantum Mechanical Geometry Refinement
 ----------------------------------------------------
