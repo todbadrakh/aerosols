@@ -184,3 +184,7 @@ configurations found at the PM7 semiempirical level of theory.
 
 4. Calculation of Thermodynamic Quantities
 ------------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Table of Contents

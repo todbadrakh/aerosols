@@ -3,14 +3,6 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Table of Contents
-   :hidden:
-
-   prerequisites
-   protocol
-
 ============
 aerosols
 ============
@@ -41,3 +33,9 @@ cluster to naturally be in. Finally, the thermodynamic properties of this set of
 possible clusters are calculated at a high level of accuracy to produce meaningful 
 data.
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Table of Contents
+
+   prerequisites
+   protocol

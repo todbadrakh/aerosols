@@ -81,3 +81,7 @@ Shell Scripts
 
 ``run-thermo.sh <input file>``
     calculates and prints the formation energies of the cluster given a ``.data`` file.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Table of Contents
