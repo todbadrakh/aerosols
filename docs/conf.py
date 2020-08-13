@@ -26,7 +26,6 @@ release = '0.1.1'
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-html_theme = 'default'
-html_theme_options = { 'titles_only': False }
+#html_theme = 'default'
 html_static_path = ['_static']
 extensions = ['sphinxcontrib.fulltoc']
