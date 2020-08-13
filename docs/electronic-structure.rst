@@ -36,35 +36,25 @@ as a starting point for setting up new calculations. On Marcy, the PBS submit sc
 .. code-block:: bash
    :caption: orca.pbs
 
-    #
-    # ORCA 4.2.1 PBS Submit Script
-    #
-    # Usage: edit the following:
-    #
-    #        _MEMORY_               : RAM. Adequate RAM must be provided.
-    #        _NUMBER_OF_PROCESSORS_ : number of processors.
-    #        _WALLTIME_             : maximum walltime.
-    #        _INPUT_                : the name of the ORCA input file without the '.inp' suffix
-    #
-    
-    #PBS -q mercury
-    #PBS -l nodes=1:ppn=_NUMBER_OF_PROCESSORS_
-    #PBS -l mem=_MEMORY_
-    #PBS -l walltime=_WALLTIME_
-    #PBS -j oe
-    #PBS -e _INPUT_
-    #PBS -N _INPUT_
-    #PBS -V
-    
-    setenv FILE _INPUT_
-    
-    source ~/.login                     # loading default user environment
-    set echo                            # toggle printing
-    module purge                        # clear environment modules
-    module load orca/4.2.1              # load ORCA 4.2.1
-    cd $PBS_O_WORKDIR                   # go to working/submit directory
-    
-    run-orca-4.2.1.csh $FILE $PBS_JOBID # run ORCA 4.2.1 using the input file $FILE and scratch directory $PBS_JOBID
+   #!/bin/tcsh   
+   #PBS -q mercury
+   #PBS -l nodes=1:ppn=_NUMBER_OF_PROCESSORS_
+   #PBS -l mem=_MEMORY_
+   #PBS -l walltime=_WALLTIME_
+   #PBS -j oe
+   #PBS -e _INPUT_
+   #PBS -N _INPUT_
+   #PBS -V
+   
+   setenv FILE _INPUT_
+   
+   source ~/.login                     # loading default user environment
+   set echo                            # toggle printing
+   module purge                        # clear environment modules
+   module load orca/4.2.1              # load ORCA 4.2.1
+   cd $PBS_O_WORKDIR                   # go to working/submit directory
+   
+   run-orca-4.2.1.csh $FILE $PBS_JOBID # run ORCA 4.2.1 using the input file $FILE and scratch directory $PBS_JOBID
 
 where ``_MEMORY_``, ``_NUMBER_OF_PROCESSORS_``, ``_WALLTIME_``, and ``_INPUT_`` are defined
 by the user. Note that ``_NUMBER_OF_PROCESSORS_`` must match the ``nproc`` parameter in the ORCA input
@@ -80,15 +70,6 @@ general structure:
 
 .. code-block:: none
    :caption: template.inp
-   
-   #
-   # Example ORCA 4.2.1 input file for _METHOD_/_BASIS_ calculations
-   #
-   # Usage: edit the following terms:
-   #
-   #        _X_                    : basis set. Can be D, T, Q, or 5.
-   #        _NUMBER_OF_PROCESSORS_ : number of processors. 16 is recommended.
-   #        _ATOMIC_COORDINATES_   : xyz coordinates of the system
    
    ! _METHOD_ _BASIS_ VeryTightSCF
       
@@ -148,6 +129,8 @@ log into Marcy, create a working directory called ``orca-example`` and change di
    Send any support requests to support@mercuryconsortium.org
    $ mkdir orca-example
    $ cd orca-example
+   $ pwd
+   /home/username/orca-example
 
 Now, create an input file for the calculation called ``example.inp`` with the following contents:
 
