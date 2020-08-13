@@ -24,9 +24,45 @@ on Marcy and Skylight. In order to use ORCA 4.2.1, load the module with the comm
 
 Now, the program ``orca`` and run script ``run-orca-4.2.1.csh`` are available in your
 command line environment. Generally, one would create a submit script which contains these
-commands and submit them to the queue: ``.pbs`` file on Marcy and ``.slurm`` file on Skylight.
+commands and submit them to the queue using a ``.pbs`` file on Marcy and a ``.slurm`` file
+on Skylight.
 
 The Submit Script
 =================
 A template submit script can be found in ``/home/software_test/orca`` and can be used
-as a starting point for setting up new calculations.
+as a starting point for setting up new calculations. On Marcy, the PBS submit script
+``orca.pbs`` is
+
+.. code-block:: bash
+   :caption: orca.pbs
+
+    #
+    # ORCA 4.2.1 PBS Submit Script
+    #
+    # Usage: edit the following:
+    #
+    #        _MEMORY_               : RAM. Adequate RAM must be provided.
+    #        _NUMBER_OF_PROCESSORS_ : number of processors.
+    #        _WALLTIME_             : maximum walltime.
+    #        _INPUT_                : the name of the ORCA input file without the '.inp' suffix
+    #
+    
+    #PBS -q mercury
+    #PBS -l nodes=1:ppn=_NUMBER_OF_PROCESSORS_
+    #PBS -l mem=_MEMORY_
+    #PBS -l walltime=_WALLTIME_
+    #PBS -j oe
+    #PBS -e _INPUT_
+    #PBS -N _INPUT_
+    #PBS -V
+    
+    setenv FILE _INPUT_
+    
+    source ~/.login                     # loading default user environment
+    set echo                            # toggle printing
+    module purge                        # clear environment modules
+    module load orca/4.2.1              # load ORCA 4.2.1
+    cd $PBS_O_WORKDIR                   # go to working/submit directory
+    
+    run-orca-4.2.1.csh $FILE $PBS_JOBID # run ORCA 4.2.1 using the input file $FILE and scratch directory $PBS_JOBID
+
