@@ -51,7 +51,6 @@ Programs
 
 Shell Scripts
 -------------
-
 ``run-ogolem.csh <input file> <number of processors>``
     starts an OGOLEM calculation when given a ``.ogo`` file.
 

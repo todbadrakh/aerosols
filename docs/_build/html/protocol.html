@@ -43,13 +43,17 @@
 <p>The best way to describe the protocol in detail is to work through an example case. Therefore,
 we will use singly-hydrated glycine as our working example and determine the concentrations and
 geometries of the most common singly-hydrated glycine clusters in the atmosphere.</p>
-<div class="section" id="step-1-genetic-algorithm-based-configurational-sampling">
-<h2>Step 1. Genetic Algorithm-Based Configurational Sampling<a class="headerlink" href="#step-1-genetic-algorithm-based-configurational-sampling" title="Permalink to this headline">¶</a></h2>
-<p>The goal here is to obtain a list of configurations, and their associated <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> files. To
-do this, we must first obtain the optimized geometries of the water molecule and the glycine
-molecule.</p>
-<p>Set up the required directories:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir -p GA QM QM/m08hx-sb QM/m08hx-mg3s QM/m08hx-mg3s/ultrafine
+<div class="section" id="set-up">
+<h2>0. Set Up<a class="headerlink" href="#set-up" title="Permalink to this headline">¶</a></h2>
+<p>Open a terminal on your local computer and connect to Skylight using your username.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ssh username@skylight.furman.edu
+</pre></div>
+</div>
+<p>Set up a working directory called <code class="docutils literal notranslate"><span class="pre">gly-h2o</span></code>, change directory to <code class="docutils literal notranslate"><span class="pre">gly-h2o</span></code>, and create the
+required working directories.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mkdir gly-h2o
+$ <span class="nb">cd</span> gly-h2o
+$ mkdir -p GA QM QM/m08hx-sb QM/m08hx-mg3s QM/m08hx-mg3s/ultrafine
 $ tree .
 .
 ├── GA
@@ -59,17 +63,138 @@ $ tree .
     └── m08hx-sb
 
 <span class="m">5</span> directories, <span class="m">0</span> files
+$
 </pre></div>
 </div>
 </div>
-<div class="section" id="step-2-rough-quantum-mechanical-geometry-refinement">
-<h2>Step 2. Rough Quantum Mechanical Geometry Refinement<a class="headerlink" href="#step-2-rough-quantum-mechanical-geometry-refinement" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="genetic-algorithm-based-configurational-sampling">
+<h2>1. Genetic Algorithm-Based Configurational Sampling<a class="headerlink" href="#genetic-algorithm-based-configurational-sampling" title="Permalink to this headline">¶</a></h2>
+<p>The goal here is to obtain a list of configurations, and their associated <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> files. To
+do this, we must first obtain the optimized geometries of the water molecule and the glycine
+molecule.</p>
+<p>Change directory to the genetic algorithm directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">pwd</span>
+/home/username/gly-h2o
+$ <span class="nb">cd</span> GA
+$ <span class="nb">pwd</span>
+/home/username/gly-h2o/GA
+</pre></div>
 </div>
-<div class="section" id="step-3-detailed-quantum-mechanical-geometry-refinement">
-<h2>Step 3. Detailed Quantum Mechanical Geometry Refinement<a class="headerlink" href="#step-3-detailed-quantum-mechanical-geometry-refinement" title="Permalink to this headline">¶</a></h2>
+<p>This calculation requires the geometry of each molecular species (monomer) in <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> format.
+Generally, one would optimize each monomer geometry in a separate preparatory step; however,
+we will provide optimized geometries for this tutorial.</p>
+<p>Copy and paste the following into a file called <code class="docutils literal notranslate"><span class="pre">h2o.xyz</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>3
+
+O          0.00000        0.00000        0.11536
+H         -0.00000        0.76308       -0.46145
+H         -0.00000       -0.76308       -0.46145
+</pre></div>
 </div>
-<div class="section" id="step-4-calculation-of-thermodynamic-quantities">
-<h2>Step 4. Calculation of Thermodynamic Quantities<a class="headerlink" href="#step-4-calculation-of-thermodynamic-quantities" title="Permalink to this headline">¶</a></h2>
+<p>Copy and paste the following into a file called <code class="docutils literal notranslate"><span class="pre">gly.xyz</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>10
+
+O          1.64695       -0.64686       -0.00003
+O          0.56490        1.30640       -0.00001
+N         -1.95271        0.01325       -0.00003
+C         -0.72105       -0.73514        0.00002
+C          0.53881        0.10923        0.00009
+H         -0.67599       -1.39711       -0.87200
+H         -0.67606       -1.39712        0.87203
+H         -1.99594        0.62049       -0.80956
+H         -1.99601        0.62047        0.80951
+H          2.41159       -0.06038       -0.00008
+</pre></div>
+</div>
+<p>This calculation also requires an input file for OGOLEM in <code class="docutils literal notranslate"><span class="pre">.ogo</span></code> format. This file describes
+the parameters of the configurational sampling run. Detailed descriptions of the input file can
+be found in the <a class="reference external" href="https://www.ogolem.org/manual/">OGOLEM manual</a>.</p>
+<p>Copy and paste the following into a file called <code class="docutils literal notranslate"><span class="pre">gly-h2o.ogo</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>###OGOLEM###
+&lt;GEOMETRY&gt;
+NumberOfParticles=2
+&lt;MOLECULE&gt;
+MoleculePath=gly.xyz
+MoleculeRepetitions=1
+&lt;/MOLECULE&gt;
+&lt;MOLECULE&gt;
+MoleculePath=h2o.xyz
+MoleculeRepetitions=1
+&lt;/MOLECULE&gt;
+&lt;CHARGES&gt;
+0;0;0
+1;0;0
+&lt;/CHARGES&gt;
+&lt;/GEOMETRY&gt;
+LocOptAlgo=mopac:pm7
+PoolSize=10
+MaxIterLocOpt=100
+NumberOfGlobIterations=20000
+BlowBondDetect=1.4
+BlowInitialBonds=1.4
+BlowFacDissoc=2.5
+InitialFillAlgo=2
+GrowCell=true
+DiversityCheck=fitnessbased:0.00001
+</pre></div>
+</div>
+<p>Finally, a SLURM submit script is required to run the calculation. This file describes the
+requested resources and contains shell commands to run the configurational sampling calculation.</p>
+<p>Copy and paste the following into a file called <code class="docutils literal notranslate"><span class="pre">ogolem.slurm</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#SBATCH -p stdmem
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=20
+#SBATCH --mem=48G
+#SBATCH --export=ALL
+#SBATCH -t 24:00:00
+
+setenv FILE gly-h2o
+
+source ~/.login
+set echo
+
+run-ogolem.csh $FILE.ogo 20
+</pre></div>
+</div>
+<p>We now have all the required files.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ls
+gly-h2o.ogo  gly.xyz  h2o.xyz  ogolem.slurm
+</pre></div>
+</div>
+<p>Finally, submit the calculation to the queue and wait for its completion.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sbatch ogolem.slurm
+Submitted batch job <span class="c1">###</span>
+</pre></div>
+</div>
+<p>Once the job finishes, one will find a new directory containing <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> files and two OGOLEM
+output files and a SLURM output file. The lowest energy configurations of the cluster have
+been identified at the semiempirical level of theory and their geometries have been saved in the
+named <code class="docutils literal notranslate"><span class="pre">rankXindividualY.xyz</span></code> where <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> are numbers. The lowest energy cluster has
+<code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code>. Now, our task is to consolidate these results into a form which can be used in the
+next steps. To this end we will check for duplicate structures and generate a list of unique
+structures based on their rotational constants.</p>
+<p>Change direction to the output folder and call the <code class="docutils literal notranslate"><span class="pre">getRotConsts-GA.csh</span></code> script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> gly-h2o
+$ getRotConsts-GA.csh <span class="m">13</span> <span class="m">0</span> <span class="m">9</span>
+</pre></div>
+</div>
+<p>This generates an output file called <code class="docutils literal notranslate"><span class="pre">rotConstsData_C</span></code> containing a list of the rotational
+constants of each configuration sorted according to their energies. Finally, generate a
+list of unique configurations.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ similarityAnalysis.py pm7 rotConstsData_C
+</pre></div>
+</div>
+<p>This generates an output file called <code class="docutils literal notranslate"><span class="pre">uniqueStructures-pm7.data</span></code> containing the unique
+configurations found at the PM7 semiempirical level of theory.</p>
+</div>
+<div class="section" id="rough-quantum-mechanical-geometry-refinement">
+<h2>2. Rough Quantum Mechanical Geometry Refinement<a class="headerlink" href="#rough-quantum-mechanical-geometry-refinement" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="detailed-quantum-mechanical-geometry-refinement">
+<h2>3. Detailed Quantum Mechanical Geometry Refinement<a class="headerlink" href="#detailed-quantum-mechanical-geometry-refinement" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="calculation-of-thermodynamic-quantities">
+<h2>4. Calculation of Thermodynamic Quantities<a class="headerlink" href="#calculation-of-thermodynamic-quantities" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -83,15 +208,13 @@ $ tree .
   <h3><a href="index.html">Table of Contents</a></h3>
   <p class="caption"><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="contents.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contents.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contents.html#protocol">Protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Protocol</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#step-1-genetic-algorithm-based-configurational-sampling">Step 1. Genetic Algorithm-Based Configurational Sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-2-rough-quantum-mechanical-geometry-refinement">Step 2. Rough Quantum Mechanical Geometry Refinement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-3-detailed-quantum-mechanical-geometry-refinement">Step 3. Detailed Quantum Mechanical Geometry Refinement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-4-calculation-of-thermodynamic-quantities">Step 4. Calculation of Thermodynamic Quantities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up">0. Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#genetic-algorithm-based-configurational-sampling">1. Genetic Algorithm-Based Configurational Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rough-quantum-mechanical-geometry-refinement">2. Rough Quantum Mechanical Geometry Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#detailed-quantum-mechanical-geometry-refinement">3. Detailed Quantum Mechanical Geometry Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#calculation-of-thermodynamic-quantities">4. Calculation of Thermodynamic Quantities</a></li>
 </ul>
 </li>
 </ul>
