@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to aerosols’s documentation! &#8212; aerosols 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to aerosols’s documentation!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to aerosols’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to aerosols’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-aerosols-s-documentation">
+<h1>Welcome to aerosols’s documentation!<a class="headerlink" href="#welcome-to-aerosols-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This page describes the computational methodology used in the Shields Lab to compute
+the thermodynamic properties of atmospheric prenucleation clusters, which are the
+precursors to atmospheric aerosols. A recent review on the topic can be found in
+Leonardi, A. IJQC 2020. A detailed description of the process of identifying candidate
+prenucleation clusters can be found in Odbadrakh, T. T. JoVE 2020. Here, we present a
+step-by-step application of our methodology as implemented on the MERCURY Consortium’s
+HPC clusters.</p>
+<div class="section" id="methodology">
+<h2>Methodology<a class="headerlink" href="#methodology" title="Permalink to this headline">¶</a></h2>
+<p>Our ultimate goal is to compute the Gibbs free energy change associated with the
+formation of gas-phase molecular clusters. This information can be used to calculate
+how much of a particular molecule ends up suspended in the atmosphere as aerosols.
+In order to calculate the energy of a cluster, we need to know its geometry. The
+process of identifying the stable geometries of a cluster is called configurational
+sampling and is the first step of our methodology. We will use a genetic
+algorithm-based configurational sampling (GA) method. The set of cluster geometries
+identified through the GA method will then be refined through a series of screening
+calculations, resulting in a final set of low-energy clusters which represent the
+possible shapes/geometries of the given molecular clusters that we can expect our
+cluster to naturally be in. Finally, the thermodynamic properties of this set of
+possible clusters are calculated at a high level of accuracy to produce meaningful
+data.</p>
+</div>
+<div class="section" id="software-requirements">
+<h2>Software Requirements<a class="headerlink" href="#software-requirements" title="Permalink to this headline">¶</a></h2>
+<p>This protocol is built around a collection of Linux shell scripts which handle the
+setup and submission of the necessary computations. The protocol also requires a
+particular directory structure to ensure that the shell scripts find the files they
+need. The shell scripts call on OGOLEM to carry out the configurational sampling
+step. The resulting set of cluster geometries are then refined using Gaussian 16.
+Finally, an in-house version of the THERMO script from NIST is used to compute and
+print the final thermodynamic data.</p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to aerosols’s documentation!</a><ul>
+<li><a class="reference internal" href="#methodology">Methodology</a></li>
+<li><a class="reference internal" href="#software-requirements">Software Requirements</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to aerosols’s documentation!</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/introduction.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to aerosols’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to aerosols’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Tuguldur T. Odbadrakh.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>
