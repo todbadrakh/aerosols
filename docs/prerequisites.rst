@@ -3,7 +3,7 @@ Prerequisites
 =============
 
 This protocol is built around a collection of Linux shell scripts which handle the 
-setup and submission of the necessary computations. The protocol also requires a 
+setup and submission of the necessary computations. The protocol therefore requires a 
 particular directory structure to ensure that the shell scripts find the files they 
 need. The shell scripts call on OGOLEM to carry out the configurational sampling 
 step. The resulting set of cluster geometries are then refined using Gaussian 16. 
@@ -19,7 +19,9 @@ called ``$DIR/QM``. The ``$DIR/QM`` directory should contain the directories for
 calculations ``$DIR/QM/m08hx-sb`` and for MG3S basis calculations ``$DIR/QM/m08hx-mg3s``.
 Finally, the MG3S directory should contain a final frequency calculation directory called
 ``$DIR/QM/m08hx-mg3s/ultrafine``. The ``tree`` command can be used to check the directory
-structure, which should produce the following output::
+structure, which should produce the following output:
+
+.. code-block:: console
 
    $ cd $DIR
    $ tree .
@@ -46,9 +48,9 @@ Programs
     performs the quantum mechanical geometry optimizations and final
     vibrational frequency calculations of configurations.
 
-Custom Scripts
---------------
-``run-ogolem.csh``
+Shell Scripts
+-------------
+``run-ogolem.csh <input file> <number of processors>``
     starts an OGOLEM calculation when given a .ogo file.
 
 ``run-m08hx-sb.csh``
@@ -75,7 +77,6 @@ Custom Scripts
 
 .. toctree::
    :maxdepth: 2
+   :glob:
 
-   prerequisites
-   protocol
-
+   *
