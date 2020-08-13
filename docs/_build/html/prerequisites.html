@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Protocol" href="protocol.html" />
-    <link rel="prev" title="Introduction" href="index.html" /> 
+    <link rel="prev" title="Introduction" href="contents.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,7 +30,7 @@
           <a href="protocol.html" title="Protocol"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Introduction"
+          <a href="contents.html" title="Introduction"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.0.1 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Prerequisites</a></li> 
@@ -45,12 +45,13 @@
   <div class="section" id="prerequisites">
 <h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
 <p>This protocol is built around a collection of Linux shell scripts which handle the
-setup and submission of the necessary computations. The protocol also requires a
+setup and submission of the necessary computations. The protocol therefore requires a
 particular directory structure to ensure that the shell scripts find the files they
 need. The shell scripts call on OGOLEM to carry out the configurational sampling
 step. The resulting set of cluster geometries are then refined using Gaussian 16.
 Finally, an in-house version of the THERMO script from NIST is used to compute and
-print the final thermodynamic data.</p>
+print the final thermodynamic data. For MERCURY HPC users, all prerequisites have
+been met on the HPC cluster.</p>
 <div class="section" id="directory-structure">
 <h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
 <p>This protocol requires a specific directory structure for the scripts to work
@@ -61,7 +62,7 @@ calculations <code class="docutils literal notranslate"><span class="pre">$DIR/Q
 Finally, the MG3S directory should contain a final frequency calculation directory called
 <code class="docutils literal notranslate"><span class="pre">$DIR/QM/m08hx-mg3s/ultrafine</span></code>. The <code class="docutils literal notranslate"><span class="pre">tree</span></code> command can be used to check the directory
 structure, which should produce the following output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd $DIR
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> <span class="nv">$DIR</span>
 $ tree .
 .
 ├── GA
@@ -70,7 +71,7 @@ $ tree .
     │   └── ultrafine
     └── m08hx-sb
 
-5 directories, 0 files
+<span class="m">5</span> directories, <span class="m">0</span> files
 </pre></div>
 </div>
 </div>
@@ -88,44 +89,31 @@ vibrational frequency calculations of configurations.</p>
 </dd>
 </dl>
 </div>
-<div class="section" id="custom-scripts">
-<h2>Custom Scripts<a class="headerlink" href="#custom-scripts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="shell-scripts">
+<h2>Shell Scripts<a class="headerlink" href="#shell-scripts" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">run-ogolem.csh</span></code></dt><dd><p>starts an OGOLEM calculation when given a .ogo file.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">run-ogolem.csh</span> <span class="pre">&lt;input</span> <span class="pre">file&gt;</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">processors&gt;</span></code></dt><dd><p>starts an OGOLEM calculation when given a <code class="docutils literal notranslate"><span class="pre">.ogo</span></code> file.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">run-m08hx-sb.csh</span></code></dt><dd><p>starts a set of M08-HX/6-31+G* geometry optimizations when given a .data file.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">run-m08hx-sb.csh</span> <span class="pre">&lt;input</span> <span class="pre">file&gt;</span> <span class="pre">&lt;job</span> <span class="pre">name&gt;</span> <span class="pre">&lt;queue&gt;</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">jobs/batch&gt;</span></code></dt><dd><p>starts a set of M08-HX/6-31+G* geometry optimizations when given a <code class="docutils literal notranslate"><span class="pre">.data</span></code> file.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">run-m08hx-mg3s.csh</span></code></dt><dd><p>starts a set of M08-HX/MG3S geometry optimizations when given a .data file.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">run-m08hx-mg3s.csh</span> <span class="pre">&lt;input</span> <span class="pre">file&gt;</span> <span class="pre">&lt;job</span> <span class="pre">name&gt;</span> <span class="pre">&lt;queue&gt;</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">jobs/batch&gt;</span></code></dt><dd><p>starts a set of M08-HX/MG3S geometry optimizations when given a <code class="docutils literal notranslate"><span class="pre">.data</span></code> file.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">run-m08hx-mg3s-ultrafine.csh</span></code></dt><dd><p>starts a set of vibrational frequency calculations when given a .data file.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">run-m08hx-mg3s-ultrafine.csh</span> <span class="pre">&lt;input</span> <span class="pre">file&gt;</span> <span class="pre">&lt;job</span> <span class="pre">name&gt;</span> <span class="pre">&lt;queue&gt;</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">jobs/batch&gt;</span></code></dt><dd><p>starts a set of vibrational frequency calculations when given a <code class="docutils literal notranslate"><span class="pre">.data</span></code> file.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">getRotConsts-GA.csh</span></code></dt><dd><p>generates a sorted list of rotational constants from OGOLEM output.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">getRotConsts-GA.csh</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">atoms&gt;</span> <span class="pre">&lt;min</span> <span class="pre">rank&gt;</span> <span class="pre">&lt;max</span> <span class="pre">rank&gt;</span></code></dt><dd><p>generates a sorted list of rotational constants from OGOLEM output.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">getRotConsts-dft.csh</span></code></dt><dd><p>generates a sorted list of rotational constants from Gaussian 16 output.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">getRotConsts-dft-sb.csh</span> <span class="pre">&lt;functional&gt;</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">atoms&gt;</span></code></dt><dd><p>generates a sorted list of small basis DFT rotational constants from Gaussian 16 output.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">SimilarityAnalysis.py</span></code></dt><dd><p>generates a sorted list of unique structures from comparing energies and rotational
-constants.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">getRotConsts-dft-lb.csh</span> <span class="pre">&lt;functional&gt;</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">atoms&gt;</span></code></dt><dd><p>generates a sorted list of large basis DFT rotational constants from Gaussian 16 output.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">run-thermo.sh</span></code></dt><dd><p>calculates and prints the formation energies of the cluster.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">getRotConsts-dft-lb-ultrafine.csh</span> <span class="pre">&lt;functional&gt;</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">atoms&gt;</span></code></dt><dd><p>generates a sorted list of final DFT rotational constants from Gaussian 16 output.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SimilarityAnalysis.py</span> <span class="pre">&lt;tag&gt;</span> <span class="pre">&lt;input</span> <span class="pre">file&gt;</span></code></dt><dd><p>generates a sorted list of unique structures from comparing energies and rotational
+constants when given a <code class="docutils literal notranslate"><span class="pre">rotConstsData_C</span></code> file.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">run-thermo.sh</span> <span class="pre">&lt;input</span> <span class="pre">file&gt;</span></code></dt><dd><p>calculates and prints the formation energies of the cluster given a <code class="docutils literal notranslate"><span class="pre">.data</span></code> file.</p>
 </dd>
 </dl>
-<div class="toctree-wrapper compound">
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Prerequisites</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#programs">Programs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#custom-scripts">Custom Scripts</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#step-1-genetic-algorithm-based-configurational-sampling">Step 1. Genetic Algorithm-Based Configurational Sampling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#step-2-rough-quantum-mechanical-geometry-refinement">Step 2. Rough Quantum Mechanical Geometry Refinement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#step-3-detailed-quantum-mechanical-geometry-refinement">Step 3. Detailed Quantum Mechanical Geometry Refinement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#step-4-calculation-of-thermodynamic-quantities">Step 4. Calculation of Thermodynamic Quantities</a></li>
-</ul>
-</li>
-</ul>
-</div>
 </div>
 </div>
 
@@ -137,17 +125,22 @@ constants.</p>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Prerequisites</a><ul>
-<li><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
-<li><a class="reference internal" href="#programs">Programs</a></li>
-<li><a class="reference internal" href="#custom-scripts">Custom Scripts</a></li>
+  <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contents.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents.html#protocol">Protocol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programs">Programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-scripts">Shell Scripts</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol</a></li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
+  <p class="topless"><a href="contents.html"
                         title="previous chapter">Introduction</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="protocol.html"
@@ -183,7 +176,7 @@ constants.</p>
           <a href="protocol.html" title="Protocol"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Introduction"
+          <a href="contents.html" title="Introduction"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.0.1 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Prerequisites</a></li> 
