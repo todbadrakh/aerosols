@@ -28,4 +28,4 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = 'default'
 html_static_path = ['_static']
-extensions = ['sphinxcontrib-fulltoc']
+extensions = ['sphinxcontrib.fulltoc']
