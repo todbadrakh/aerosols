@@ -4,10 +4,10 @@
    contain the root `toctree` directive.
 
 ============
-Introduction
+aerosols
 ============
 
-This page describes the computational methodology used in the 
+This document describes the computational methodology used in the 
 `Shields <https://www.furman.edu/people/george-c-shields>`_ Lab to compute 
 the thermodynamic properties of atmospheric prenucleation clusters, which are the 
 precursors to atmospheric aerosols. A recent review on the topic can be found in 
