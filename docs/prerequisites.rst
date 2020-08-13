@@ -20,12 +20,16 @@ Finally, the MG3S directory should contain a final frequency calculation directo
 ``$DIR/QM/m08hx-mg3s/ultrafine``. The ``tree`` command can be used to check the directory
 structure, which should produce the following output::
 
+   $ cd $DIR
+   $ tree .
    .
    ├── GA
    └── QM
        ├── m08hx-mg3s
        │   └── ultrafine
        └── m08hx-sb
+   
+   5 directories, 0 files
 
 Programs
 --------
