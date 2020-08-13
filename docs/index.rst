@@ -39,4 +39,4 @@ data.
    prerequisites
    protocol
    electronic-structure
-   index
+
