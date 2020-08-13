@@ -199,7 +199,3 @@ DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory.
 .. toctree::
    :caption: aerosols Manual
 
-   prerequisites
-   protocol
-   electronic-structure
-   index

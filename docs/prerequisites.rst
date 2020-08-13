@@ -85,8 +85,3 @@ Shell Scripts
 .. toctree::
    :caption: aerosols Manual
 
-   prerequisites
-   protocol
-   electronic-structure
-   index
-
