@@ -66,3 +66,10 @@ as a starting point for setting up new calculations. On Marcy, the PBS submit sc
     
     run-orca-4.2.1.csh $FILE $PBS_JOBID # run ORCA 4.2.1 using the input file $FILE and scratch directory $PBS_JOBID
 
+where ``_MEMORY_``, ``_NUMBER_OF_PROCESSORS_``, ``_WALLTIME_``, and ``_INPUT_`` are to be provided
+by the user. Note that ``_NUMBER_OF_PROCESSORS_`` must match the ``nproc`` parameter in the ORCA input
+file.
+
+Skylight information under construction.
+
+
