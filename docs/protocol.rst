@@ -187,7 +187,4 @@ configurations found at the PM7 semiempirical level of theory.
 
 .. toctree::
    :maxdepth: 2
-   :glob:
    :caption: Table of Contents
-
-   *
