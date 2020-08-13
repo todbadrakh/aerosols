@@ -72,4 +72,14 @@ file.
 
 Skylight information under construction.
 
+The ORCA Input File
+===================
+Template input files for the following methods can be found in /home/software_test/orca:
+
+    | CCSD(T)
+    | DLPNO-CCSD(T)
+    | CCSD(T)-F12
+    | DLPNO-CCSD(T)-F12
+    | RI-MP2-F12
+
 
