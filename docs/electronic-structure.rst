@@ -66,7 +66,7 @@ as a starting point for setting up new calculations. On Marcy, the PBS submit sc
     
     run-orca-4.2.1.csh $FILE $PBS_JOBID # run ORCA 4.2.1 using the input file $FILE and scratch directory $PBS_JOBID
 
-where ``_MEMORY_``, ``_NUMBER_OF_PROCESSORS_``, ``_WALLTIME_``, and ``_INPUT_`` are to be provided
+where ``_MEMORY_``, ``_NUMBER_OF_PROCESSORS_``, ``_WALLTIME_``, and ``_INPUT_`` are defined
 by the user. Note that ``_NUMBER_OF_PROCESSORS_`` must match the ``nproc`` parameter in the ORCA input
 file.
 
@@ -74,12 +74,48 @@ Skylight information under construction.
 
 The ORCA Input File
 ===================
-Template input files for the following methods can be found in /home/software_test/orca:
+Template input files for CCSD(T)-F12, DLPNO-CCSD(T)-F12, and RI-MP2-F12 methods can be found in
+``/home/software_test/orca``. Regardless of the computational method, all input files have the following
+general structure:
 
-    | CCSD(T)
-    | DLPNO-CCSD(T)
-    | CCSD(T)-F12
-    | DLPNO-CCSD(T)-F12
-    | RI-MP2-F12
+.. code-block:: none
+   :caption: template.inp
+   
+   #
+   # Example ORCA 4.2.1 input file for _METHOD_/_BASIS_ calculations
+   #
+   # Usage: edit the following terms:
+   #
+   #        _X_                    : basis set. Can be D, T, Q, or 5.
+   #        _NUMBER_OF_PROCESSORS_ : number of processors. 16 is recommended.
+   #        _ATOMIC_COORDINATES_   : xyz coordinates of the system
+   
+   ! _METHOD_ _BASIS_ VeryTightSCF
+      
+   %pal
+     nproc _NUMBER_OF_PROCESSORS_
+   end
+   
+   * xyz 0 1
+   _ATOMIC_COORDINATES_
+   *
 
+where ``_METHOD_``, ``_BASIS_``, ``_NUMBER_OF_PROCESSORS_``, and ``_ATOMIC_COORDINATES_`` are defined by
+the user. The unique lines of each template input file are as follows:
 
+.. code-block:: none
+   :caption: dlpno-ccsdt.inp
+
+   ! DLPNO-CCSD(T) aug-cc-pV_X_Z aug-cc-pV_X_Z/C VeryTightSCF
+
+.. code-block:: none
+   :caption: dlpno-ccsdt-f12.inp
+
+   ! DLPNO-CCSD(T)-F12 cc-pV_X_Z-F12 cc-pV_X_Z-F12-CABS cc-pV_X_Z/C VeryTightSCF
+
+.. code-block:: none
+   :caption: ri-mp2-f12.inp
+
+   ! F12-RI-MP2 cc-pV_X_Z-F12 cc-pV_X_Z-F12-CABS cc-pV_X_Z/C VeryTightSCF
+
+where ``_x_`` is defined by the user.
