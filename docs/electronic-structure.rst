@@ -195,8 +195,14 @@ Create a submit script called ``example.pbs`` with the following contents:
    
    run-orca-4.2.1.csh $FILE $PBS_JOBID
 
-This script requests 4 CPUs and 8GB RAM for 2:00:00 hours and defines the job name as ``example``. This
-calculation will complete quickly because water is a small molecule and generate an output file
+This script requests 4 CPUs and 8GB RAM for 2:00:00 hours for a job named ``example``. Now submit
+the calculation using the ``qsub`` command.
+
+.. code-block:: bash
+
+   $ qsub example.pbs
+
+This calculation will complete quickly because water is a small molecule and generate an output file
 called ``example.out``. The final electronic energy can be extracted with a ``grep`` command:
 
 .. code-block:: bash
@@ -204,4 +210,9 @@ called ``example.out``. The final electronic energy can be extracted with a ``gr
    $ grep 'FINAL SINGLE POINT ENERGY' example.out
    example.out:FINAL SINGLE POINT ENERGY       -76.367027678417
 
+Thus, the final result tells us that the electronic energy of water is -76.367027678417 Ha at the
+DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory.
 
+.. toctree::
+   :maxdepth: 2
+   :hidden:
