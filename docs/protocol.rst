@@ -185,6 +185,9 @@ configurations found at the PM7 semiempirical level of theory.
 ------------------------------------------
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Table of Contents
-   :hidden:
+   :caption: aerosols Manual
+
+   prerequisites
+   protocol
+   electronic-structure
+   index

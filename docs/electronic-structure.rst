@@ -197,6 +197,9 @@ Thus, the final result tells us that the electronic energy of water is -76.36702
 DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory.
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Table of Contents
-   :hidden:
+   :caption: aerosols Manual
+
+   prerequisites
+   protocol
+   electronic-structure
+   index
