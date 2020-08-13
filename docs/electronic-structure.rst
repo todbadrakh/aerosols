@@ -119,3 +119,89 @@ the user. The unique lines of each template input file are as follows:
    ! F12-RI-MP2 cc-pV_X_Z-F12 cc-pV_X_Z-F12-CABS cc-pV_X_Z/C VeryTightSCF
 
 where ``_x_`` is defined by the user.
+
+An Example Calculation
+======================
+Let us calculate the energy of water at the DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory as an exercise. First,
+log into Marcy, create a working directory called ``orca-example`` and change directory to the new folder.
+
+.. code-block:: bash
+   
+   $ ssh username@marcy.furman.edu
+   Last login: Thu Aug 13 13:05:36 2020 from 10.101.80.1
+           +-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+
+           |    |M|A|R|C|Y| @       MERCURY Consortium    |
+         	+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   Ganglia - 	http://marcy.furman.edu/ganglia/
+   WebMO - 	http://marcy.furman.edu/webmo.html	(mercuryuser:marcy)
+   
+   UPDATES:
+    
+   02/08/15 - NEW queue rules are implemented
+     See http://marcy.furman.edu/wiki/doku.php/start?&#running_calculations for details
+     If you submit to the 'mercury' queue requesting the necessary resources
+     (walltime=x:x:x, nodes=x:ppn=x, mem=xGB), the job will be routed to the best queue.
+   
+   08/15/14 - Example runs and benchmarks are compiled at ~software_test
+   	   or online at http://marcy.furman.edu/~software_test
+   
+   Send any support requests to support@mercuryconsortium.org
+   $ mkdir orca-example
+   $ cd orca-example
+
+Now, create an input file for the calculation called ``example.inp`` with the following contents:
+
+.. code-block:: none
+   :caption: example.inp
+
+   ! DLPNO-CCSD(T)-F12 cc-pVTZ-F12 cc-pVTZ-F12-CABS cc-pVTZ/C VeryTightSCF PModel
+   
+   %pal
+     nproc 4
+   end
+
+   * xyz 0 1
+     O  0.000000000  0.000000000  0.369372944
+     H  0.783975899  0.000000000 -0.184686472
+     H -0.783975899  0.000000000 -0.184686472
+   *
+
+This input file requests a DLPNO-CCSD(T)-F12/cc-pVTZ-F12 single point calculation using the
+cc-pVTZ-F12-CABS and cc-pVTZ/C auxiliary basis sets and 4 CPUs. Now we need a PBS submit script to
+actually run the calculation.
+
+Create a submit script called ``example.pbs`` with the following contents:
+
+.. code-block:: none
+   :caption: example.pbs
+
+   #!/bin/tcsh
+   #PBS -q mercury
+   #PBS -l mem=8gb
+   #PBS -l nodes=1:ppn=4
+   #PBS -l walltime=2:00:00
+   #PBS -j oe
+   #PBS -e example
+   #PBS -N example
+   #PBS -V
+   
+   setenv FILE example
+   
+   source ~/.login
+   set echo
+   module purge
+   module load orca/4.2.1
+   cd $PBS_O_WORKDIR
+   
+   run-orca-4.2.1.csh $FILE $PBS_JOBID
+
+This script requests 4 CPUs and 8GB RAM for 2:00:00 hours and defines the job name as ``example``. This
+calculation will complete quickly because water is a small molecule and generate an output file
+called ``example.out``. The final electronic energy can be extracted with a ``grep`` command:
+
+.. code-block:: bash
+   
+   $ grep 'FINAL SINGLE POINT ENERGY' example.out
+   example.out:FINAL SINGLE POINT ENERGY       -76.367027678417
+
+
