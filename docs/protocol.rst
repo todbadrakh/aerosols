@@ -31,7 +31,6 @@ required working directories.
        └── m08hx-sb
    
    5 directories, 0 files
-   $
 
 1. Genetic Algorithm-Based Configurational Sampling
 ---------------------------------------------------

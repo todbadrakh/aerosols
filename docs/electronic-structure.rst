@@ -23,9 +23,9 @@ on Marcy and Skylight. In order to use ORCA 4.2.1, load the module with the comm
     module load orca/4.2.1
 
 Now, the program ``orca`` and run script ``run-orca-4.2.1.csh`` are available in your
-command line environment. Generally, one would create a submit script which contains these
-commands and submit them to the queue using a ``.pbs`` file on Marcy and a ``.slurm`` file
-on Skylight.
+command line environment. Generally, one would create a submit script in the form of a
+``.pbs`` file on Marcy and a ``.slurm`` file on Skylight containing instructions which
+use the ``orca`` and ``run-orca-4.2.1.csh`` program and script.
 
 The Submit Script
 =================
