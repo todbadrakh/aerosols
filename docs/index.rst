@@ -35,7 +35,8 @@ data.
 
 .. toctree::
    :maxdepth: 2
-   :glob:
-   :caption: Table of Contents
+   :caption: aerosols Manual
 
-   *
+   prerequisites
+   protocol
+   electronic-structure
