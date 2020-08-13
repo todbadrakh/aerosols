@@ -1,0 +1,25 @@
+Prerequisites
+=============
+
+This protocol is built around a collection of Linux shell scripts which handle the 
+setup and submission of the necessary computations. The protocol also requires a 
+particular directory structure to ensure that the shell scripts find the files they 
+need. The shell scripts call on OGOLEM to carry out the configurational sampling 
+step. The resulting set of cluster geometries are then refined using Gaussian 16. 
+Finally, an in-house version of the THERMO script from NIST is used to compute and 
+print the final thermodynamic data.
+
+Directory Structure
+-------------------
+This protocol requires a specific directory structure shown below as the output of
+``tree``.
+
+.. code-block:: python
+   $ tree
+   .
+   ├── GA
+   └── QM
+       ├── m08hx-mg3s
+       │   └── ultrafine
+       └── m08hx-sb
+
