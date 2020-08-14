@@ -24,3 +24,6 @@ required working directories.
        └── m08hx-sb
    
    5 directories, 0 files
+
+.. toctree::
+   :caption: Contents
