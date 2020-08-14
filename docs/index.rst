@@ -38,5 +38,7 @@ data.
 
    prerequisites
    protocol/index
+   protocol/set-up
+   protocol/configurational-sampling
    electronic-structure
 
