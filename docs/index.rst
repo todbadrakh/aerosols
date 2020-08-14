@@ -37,6 +37,6 @@ data.
    :caption: Contents
 
    prerequisites
-   protocol
+   protocol/index
    electronic-structure
 
