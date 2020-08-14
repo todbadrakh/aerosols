@@ -23,5 +23,5 @@ release = '0.2.1'
 
 # -- General configuration ---------------------------------------------------
 master_doc = 'index'
-#html_theme = 'default'
+html_theme = 'default'
 html_sidebars = { '**': ['globaltoc.html'] }
