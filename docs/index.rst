@@ -34,7 +34,8 @@ possible clusters are calculated at a high level of accuracy to produce meaningf
 data.
 
 .. toctree::
-   :maxdepth: 2
+   :numbered:
+   :caption: Contents
 
    prerequisites
    protocol

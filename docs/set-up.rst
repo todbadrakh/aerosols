@@ -1,5 +1,5 @@
-0. Set Up
----------
+Set Up
+------
 
 Open a terminal on your local computer and connect to Marcy or Skylight using your MERCURY account.
 

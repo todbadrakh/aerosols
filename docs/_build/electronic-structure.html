@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>High-Level Electronic Energies &#8212; aerosols 0.2.1 documentation</title>
+    <title>3. High-Level Electronic Energies &#8212; aerosols 0.2.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -17,7 +17,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Protocol" href="thermodynamics.html" /> 
+    <link rel="prev" title="2.5. Calculation of Thermodynamic Quantities" href="thermodynamics.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,10 +26,10 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="thermodynamics.html" title="Protocol"
+          <a href="thermodynamics.html" title="2.5. Calculation of Thermodynamic Quantities"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.2.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">High-Level Electronic Energies</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>High-Level Electronic Energies</a></li> 
       </ul>
     </div>  
 
@@ -39,7 +39,7 @@
           <div class="body" role="main">
             
   <div class="section" id="high-level-electronic-energies">
-<h1>High-Level Electronic Energies<a class="headerlink" href="#high-level-electronic-energies" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">3. </span>High-Level Electronic Energies<a class="headerlink" href="#high-level-electronic-energies" title="Permalink to this headline">¶</a></h1>
 <p>The electronic energies used in calculating the Gibbs free energies of formation of gas
 phase molecular clusters can be computed at much higher levels of theory compared to
 density-functional theory. In particular, explicitly-correlated, correlation-corrected
@@ -53,7 +53,7 @@ information can be found
 <a class="reference external" href="https://pubs-rsc-org.libproxy.furman.edu/en/content/articlelanding/2008/CP/b808067b#!divAbstract">here</a>.
 These methods are implemented in ORCA 4.2.1 and are available on Marcy and Skylight.</p>
 <div class="section" id="the-orca-module">
-<h2>The ORCA Module<a class="headerlink" href="#the-orca-module" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.1. </span>The ORCA Module<a class="headerlink" href="#the-orca-module" title="Permalink to this headline">¶</a></h2>
 <p>ORCA 4.2.1 is implemented as an <a class="reference external" href="http://modules.sourceforge.net/">envorinmental module</a>
 on Marcy and Skylight. In order to use ORCA 4.2.1, load the module with the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">orca</span><span class="o">/</span><span class="mf">4.2</span><span class="o">.</span><span class="mi">1</span>
@@ -65,7 +65,7 @@ command line environment. Generally, one would create a submit script in the for
 use the <code class="docutils literal notranslate"><span class="pre">orca</span></code> and <code class="docutils literal notranslate"><span class="pre">run-orca-4.2.1.csh</span></code> program and script.</p>
 </div>
 <div class="section" id="the-submit-script">
-<h2>The Submit Script<a class="headerlink" href="#the-submit-script" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.2. </span>The Submit Script<a class="headerlink" href="#the-submit-script" title="Permalink to this headline">¶</a></h2>
 <p>A template submit script can be found in <code class="docutils literal notranslate"><span class="pre">/home/software_test/orca</span></code> and can be used
 as a starting point for setting up new calculations. On Marcy, the PBS submit script
 <code class="docutils literal notranslate"><span class="pre">orca.pbs</span></code> is</p>
@@ -120,7 +120,7 @@ run-orca-4.2.1.csh <span class="nv">$FILE</span> <span class="nv">$SLURM_JOBID</
 </div>
 </div>
 <div class="section" id="the-orca-input-file">
-<h2>The ORCA Input File<a class="headerlink" href="#the-orca-input-file" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.3. </span>The ORCA Input File<a class="headerlink" href="#the-orca-input-file" title="Permalink to this headline">¶</a></h2>
 <p>Template input files for CCSD(T)-F12, DLPNO-CCSD(T)-F12, and RI-MP2-F12 methods can be found in
 <code class="docutils literal notranslate"><span class="pre">/home/software_test/orca</span></code>. Regardless of the computational method, all input files have the following
 general structure:</p>
@@ -161,7 +161,7 @@ the user. The unique lines of each template input file are as follows:</p>
 <p>where <code class="docutils literal notranslate"><span class="pre">_x_</span></code> is defined by the user.</p>
 </div>
 <div class="section" id="an-example-calculation">
-<h2>An Example Calculation<a class="headerlink" href="#an-example-calculation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.4. </span>An Example Calculation<a class="headerlink" href="#an-example-calculation" title="Permalink to this headline">¶</a></h2>
 <p>Let us calculate the energy of water at the DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory as an exercise. First,
 log into Marcy, create a working directory called <code class="docutils literal notranslate"><span class="pre">orca-example</span></code> and change directory to the new folder.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ssh username@marcy.furman.edu
@@ -262,13 +262,15 @@ DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory.</p>
 <h3><a href="index.html">Table of Contents</a></h3>
 <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
-<li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">High-Level Electronic Energies</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#the-orca-module">The ORCA Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#the-submit-script">The Submit Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#the-orca-input-file">The ORCA Input File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#an-example-calculation">An Example Calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">1. Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">2. Protocol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. High-Level Electronic Energies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-orca-module">3.1. The ORCA Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-submit-script">3.2. The Submit Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-orca-input-file">3.3. The ORCA Input File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#an-example-calculation">3.4. An Example Calculation</a><ul class="simple">
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -284,10 +286,10 @@ DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="thermodynamics.html" title="Protocol"
+          <a href="thermodynamics.html" title="2.5. Calculation of Thermodynamic Quantities"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.2.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">High-Level Electronic Energies</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>High-Level Electronic Energies</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

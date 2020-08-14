@@ -1,5 +1,5 @@
-2. Rough Quantum Mechanical Geometry Refinement
------------------------------------------------
+Rough Quantum Mechanical Geometry Refinement
+--------------------------------------------
 
 .. toctree::
 

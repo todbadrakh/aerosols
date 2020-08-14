@@ -1,5 +1,5 @@
-1. Genetic Algorithm-Based Configurational Sampling
----------------------------------------------------
+Genetic Algorithm-Based Configurational Sampling
+------------------------------------------------
 
 The goal here is to obtain a list of configurations, and their associated ``.xyz`` files. To
 do this, we must first obtain the optimized geometries of the water molecule and the glycine

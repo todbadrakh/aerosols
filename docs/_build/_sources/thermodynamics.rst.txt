@@ -1,5 +1,5 @@
-4. Calculation of Thermodynamic Quantities
-------------------------------------------
+Calculation of Thermodynamic Quantities
+---------------------------------------
 
 .. toctree::
 

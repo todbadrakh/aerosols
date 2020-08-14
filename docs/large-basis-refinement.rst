@@ -1,5 +1,5 @@
-3. Detailed Quantum Mechanical Geometry Refinement
---------------------------------------------------
+Detailed Quantum Mechanical Geometry Refinement
+-----------------------------------------------
 
 .. toctree::
 

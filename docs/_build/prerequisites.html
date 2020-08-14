@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prerequisites &#8212; aerosols 0.2.1 documentation</title>
+    <title>1. Prerequisites &#8212; aerosols 0.2.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -17,7 +17,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Protocol" href="protocol.html" />
+    <link rel="next" title="2. Protocol" href="protocol.html" />
     <link rel="prev" title="aerosols Documentation" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -27,13 +27,13 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="protocol.html" title="Protocol"
+          <a href="protocol.html" title="2. Protocol"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="aerosols Documentation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.2.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Prerequisites</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Prerequisites</a></li> 
       </ul>
     </div>  
 
@@ -43,7 +43,7 @@
           <div class="body" role="main">
             
   <div class="section" id="prerequisites">
-<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">1. </span>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
 <p>This protocol is built around a collection of Linux shell scripts which handle the
 setup and submission of the necessary computations. The protocol therefore requires a
 particular directory structure to ensure that the shell scripts find the files they
@@ -53,7 +53,7 @@ Finally, an in-house version of the THERMO script from NIST is used to compute a
 print the final thermodynamic data. For MERCURY HPC users, all prerequisites have
 been met on the HPC cluster.</p>
 <div class="section" id="directory-structure">
-<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
 <p>This protocol requires a specific directory structure for the scripts to work
 properly. Given a particular working directory <code class="docutils literal notranslate"><span class="pre">$DIR</span></code>, there should be a main
 genetic algorithm directory called <code class="docutils literal notranslate"><span class="pre">$DIR/GA</span></code> and a main quantum mechanics directory
@@ -76,7 +76,7 @@ $ tree .
 </div>
 </div>
 <div class="section" id="programs">
-<h2>Programs<a class="headerlink" href="#programs" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2. </span>Programs<a class="headerlink" href="#programs" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt><a class="reference external" href="https://www.ogolem.org">OGOLEM</a></dt><dd><p>performs the genetic algorithm-based configurational sampling of gas
 phase molecular clusters and is configured to interface with MOPAC.</p>
@@ -90,7 +90,7 @@ vibrational frequency calculations of configurations.</p>
 </dl>
 </div>
 <div class="section" id="shell-scripts">
-<h2>Shell Scripts<a class="headerlink" href="#shell-scripts" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.3. </span>Shell Scripts<a class="headerlink" href="#shell-scripts" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">run-ogolem.csh</span> <span class="pre">&lt;input</span> <span class="pre">file&gt;</span> <span class="pre">&lt;number</span> <span class="pre">of</span> <span class="pre">processors&gt;</span></code></dt><dd><p>starts an OGOLEM calculation when given a <code class="docutils literal notranslate"><span class="pre">.ogo</span></code> file.</p>
 </dd>
@@ -127,15 +127,18 @@ constants when given a <code class="docutils literal notranslate"><span class="p
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Prerequisites</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#programs">Programs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#shell-scripts">Shell Scripts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">1.1. Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programs">1.2. Programs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-scripts">1.3. Shell Scripts</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol</a></li>
-<li class="toctree-l1"><a class="reference internal" href="electronic-structure.html">High-Level Electronic Energies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">2. Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electronic-structure.html">3. High-Level Electronic Energies</a></li>
 </ul>
 
         </div>
@@ -149,13 +152,13 @@ constants when given a <code class="docutils literal notranslate"><span class="p
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="protocol.html" title="Protocol"
+          <a href="protocol.html" title="2. Protocol"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="aerosols Documentation"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.2.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Prerequisites</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Prerequisites</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
