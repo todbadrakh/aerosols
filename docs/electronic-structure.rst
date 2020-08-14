@@ -34,7 +34,7 @@ as a starting point for setting up new calculations. On Marcy, the PBS submit sc
 ``orca.pbs`` is
 
 .. code-block:: bash
-   :caption: orca.pbs
+   :caption: /home/software_test/orca/orca.pbs
 
    #!/bin/tcsh   
    #PBS -q mercury
@@ -60,7 +60,27 @@ where ``_MEMORY_``, ``_NUMBER_OF_PROCESSORS_``, ``_WALLTIME_``, and ``_INPUT_`` 
 by the user. Note that ``_NUMBER_OF_PROCESSORS_`` must match the ``nproc`` parameter in the ORCA input
 file.
 
-Skylight information under construction.
+On Skylight, the SLURM submit script ``orca.slurm`` is
+
+.. code-block:: bash
+   :caption: /home/software_test/orca/orca.slurm
+
+   #SBATCH -p stdmem
+   #SBATCH --nodes=1
+   #SBATCH --ntasks-per-node=_NUMBER_OF_PROCESSORS_
+   #SBATCH --mem=_MEMORY_
+   #SBATCH -t _WALLTIME_
+   #SBATCH --export=ALL
+   
+   setenv FILE _INPUT_
+   
+   source ~/.login                     # loading default user environment
+   set echo                            # toggle printing
+   module purge                        # clear environment modules
+   module load orca/4.2.1              # load ORCA 4.2.1
+   cd $SLURM_SUBMIT_DIR                # go to working/submit directory
+   
+   run-orca-4.2.1.csh $FILE $SLURM_JOBID # run ORCA 4.2.1 using the input file $FILE and scratch directory $PBS_JOBID
 
 The ORCA Input File
 ===================
@@ -69,7 +89,7 @@ Template input files for CCSD(T)-F12, DLPNO-CCSD(T)-F12, and RI-MP2-F12 methods 
 general structure:
 
 .. code-block:: none
-   :caption: template.inp
+   :caption: /home/software_test/orca/template.inp
    
    ! _METHOD_ _BASIS_ VeryTightSCF
       
@@ -85,17 +105,17 @@ where ``_METHOD_``, ``_BASIS_``, ``_NUMBER_OF_PROCESSORS_``, and ``_ATOMIC_COORD
 the user. The unique lines of each template input file are as follows:
 
 .. code-block:: none
-   :caption: dlpno-ccsdt-avxz.inp
+   :caption: /home/software_test/orca/dlpno-ccsdt-avxz.inp
 
    ! DLPNO-CCSD(T) aug-cc-pV_X_Z aug-cc-pV_X_Z/C VeryTightSCF
 
 .. code-block:: none
-   :caption: dlpno-ccsdt-f12-vxz.inp
+   :caption: /home/software_test/orca/dlpno-ccsdt-f12-vxz.inp
 
    ! DLPNO-CCSD(T)-F12 cc-pV_X_Z-F12 cc-pV_X_Z-F12-CABS cc-pV_X_Z/C VeryTightSCF
 
 .. code-block:: none
-   :caption: ri-mp2-f12-vxz.inp
+   :caption: /home/software_test/orca/ri-mp2-f12-vxz.inp
 
    ! F12-RI-MP2 cc-pV_X_Z-F12 cc-pV_X_Z-F12-CABS cc-pV_X_Z/C VeryTightSCF
 
