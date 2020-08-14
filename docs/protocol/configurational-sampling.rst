@@ -1,39 +1,6 @@
-========
-Protocol
-========
-
-The best way to describe the protocol in detail is to work through an example case. Therefore,
-we will use singly-hydrated glycine as our working example and determine the concentrations and
-geometries of the most common singly-hydrated glycine clusters in the atmosphere.
-
-0. Set Up
----------
-Open a terminal on your local computer and connect to Skylight using your username.
-
-.. code-block:: bash
-   
-   $ ssh username@skylight.furman.edu
-
-Set up a working directory called ``gly-h2o``, change directory to ``gly-h2o``, and create the
-required working directories.
-
-.. code-block:: bash
-
-   $ mkdir gly-h2o
-   $ cd gly-h2o
-   $ mkdir -p GA QM QM/m08hx-sb QM/m08hx-mg3s QM/m08hx-mg3s/ultrafine
-   $ tree .
-   .
-   ├── GA
-   └── QM
-       ├── m08hx-mg3s
-       │   └── ultrafine
-       └── m08hx-sb
-   
-   5 directories, 0 files
-
 1. Genetic Algorithm-Based Configurational Sampling
 ---------------------------------------------------
+
 The goal here is to obtain a list of configurations, and their associated ``.xyz`` files. To
 do this, we must first obtain the optimized geometries of the water molecule and the glycine
 molecule.
@@ -55,6 +22,7 @@ we will provide optimized geometries for this tutorial.
 Copy and paste the following into a file called ``h2o.xyz``:
 
 .. code-block:: none
+   :caption: /home/username/gly-h2o/GA/h2o.xyz
 
    3
    
@@ -65,6 +33,7 @@ Copy and paste the following into a file called ``h2o.xyz``:
 Copy and paste the following into a file called ``gly.xyz``:
 
 .. code-block:: none
+   :caption: /home/username/gly-h2o/GA/gly.xyz
    
    10
    
@@ -81,11 +50,13 @@ Copy and paste the following into a file called ``gly.xyz``:
 
 This calculation also requires an input file for OGOLEM in ``.ogo`` format. This file describes
 the parameters of the configurational sampling run. Detailed descriptions of the input file can
-be found in the `OGOLEM manual <https://www.ogolem.org/manual/>`_. 
+be found in the `OGOLEM manual <https://www.ogolem.org/manual/>`_. For this tutorial, we will
+use a pool size of 100 configurations and run the genetic algorithm for 20,000 iterations.
 
 Copy and paste the following into a file called ``gly-h2o.ogo``:
 
 .. code-block:: none
+   :caption: :caption: /home/username/gly-h2o/GA/gly-h2o.ogo
 
    ###OGOLEM###
    <GEOMETRY>
@@ -104,7 +75,7 @@ Copy and paste the following into a file called ``gly-h2o.ogo``:
    </CHARGES>
    </GEOMETRY>
    LocOptAlgo=mopac:pm7
-   PoolSize=10
+   PoolSize=100
    MaxIterLocOpt=100
    NumberOfGlobIterations=20000
    BlowBondDetect=1.4
@@ -114,35 +85,62 @@ Copy and paste the following into a file called ``gly-h2o.ogo``:
    GrowCell=true
    DiversityCheck=fitnessbased:0.00001
 
-Finally, a SLURM submit script is required to run the calculation. This file describes the
+Finally, a submit script is required to run the calculation. This file describes the
 requested resources and contains shell commands to run the configurational sampling calculation.
+Since Marcy and Skylight operate different queueing systems (PBS on Marcy and SLURM on Skylight),
+instructions for both clusters are provided below.
 
-Copy and paste the following into a file called ``ogolem.slurm``:
+On Marcy, create a file called ``ogolem.pbs`` with the following contents:
 
-.. code-block:: none
+.. code-block:: bash
+   :caption: /home/username/gly-h2o/ogolem.pbs
 
+   #!/bin/tcsh
+   #PBS -q mercury
+   #PBS -l nodes=1:ppn=16
+   #PBS -l mem=30gb
+   #PBS -l walltime=48:00:00
+   #PBS -j oe
+   #PBS -V
+   
+   setenv FILE gly-h2o          # assign the OGOLEM input file name to $FILE
+   
+   source ~/.login              # load default user environment
+   set echo                     # toggle printing
+   
+   run-ogolem.csh $FILE.ogo 16  # run the OGOLEM calculation
+
+
+On Skylight, create a file called ``ogolem.slurm`` with the following contents:
+
+.. code-block:: bash
+   :caption: /home/username/gly-h2o/ogolem.slurm
+
+   #!/bin/tcsh
    #SBATCH -p stdmem
    #SBATCH --nodes=1
    #SBATCH --ntasks-per-node=20
    #SBATCH --mem=48G
+   #SBATCH -t 48:00:00
    #SBATCH --export=ALL
-   #SBATCH -t 24:00:00
    
-   setenv FILE gly-h2o
+   setenv FILE gly-h2o          # assign OGOLEM input file name to $FILE
    
-   source ~/.login
-   set echo
+   source ~/.login              # load default user environment
+   set echo                     # toggle printing
    
-   run-ogolem.csh $FILE.ogo 20
+   run-ogolem.csh $FILE.ogo 20  # run the OGOLEM calculation
 
-We now have all the required files.
+The submit scripts have been written to use the optimal resources for each cluster, so the
+number of processors and memory requests are different between the ``.pbs`` and ``.slurm``
+files. We finally have all the required files.
 
 .. code-block:: bash
 
    $ ls
    gly-h2o.ogo  gly.xyz  h2o.xyz  ogolem.slurm
 
-Finally, submit the calculation to the queue and wait for its completion.
+Submit the calculation to the queue and wait for its completion.
 
 .. code-block:: bash
 
@@ -157,12 +155,12 @@ named ``rankXindividualY.xyz`` where ``X`` and ``Y`` are numbers. The lowest ene
 next steps. To this end we will check for duplicate structures and generate a list of unique
 structures based on their rotational constants.
 
-Change direction to the output folder and call the ``getRotConsts-GA.csh`` script.
+Change directory to the output folder and call the ``getRotConsts-GA.csh`` script.
 
 .. code-block:: bash
 
    $ cd gly-h2o
-   $ getRotConsts-GA.csh 13 0 9
+   $ getRotConsts-GA.csh 13 0 99
 
 This generates an output file called ``rotConstsData_C`` containing a list of the rotational
 constants of each configuration sorted according to their energies. Finally, generate a
@@ -174,16 +172,4 @@ list of unique configurations.
 
 This generates an output file called ``uniqueStructures-pm7.data`` containing the unique
 configurations found at the PM7 semiempirical level of theory.
-
-2. Rough Quantum Mechanical Geometry Refinement
------------------------------------------------
-
-3. Detailed Quantum Mechanical Geometry Refinement
---------------------------------------------------
-
-4. Calculation of Thermodynamic Quantities
-------------------------------------------
-
-.. toctree::
-   :caption: aerosols Manual
 
