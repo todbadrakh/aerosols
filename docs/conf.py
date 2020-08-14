@@ -25,4 +25,4 @@ release = '0.1.1'
 # -- General configuration ---------------------------------------------------
 master_doc = 'index'
 html_theme = 'default'
-html_sidebars = { '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'] }
+html_sidebars = { '**': ['globaltoc.html'] }

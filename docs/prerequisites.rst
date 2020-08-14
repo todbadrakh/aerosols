@@ -83,5 +83,5 @@ Shell Scripts
     calculates and prints the formation energies of the cluster given a ``.data`` file.
 
 .. toctree::
-   :caption: aerosols Manual
+   :caption: Contents
 
