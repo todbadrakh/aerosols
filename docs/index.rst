@@ -41,5 +41,8 @@ data.
    protocol
    set-up
    configurational-sampling
+   small-basis-refinement
+   large-basis-refinement
+   thermodynamics
    electronic-structure
-
+   
