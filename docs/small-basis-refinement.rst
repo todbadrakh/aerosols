@@ -53,7 +53,7 @@ This script takes the density functional (``m08hx``) and number of atoms (``13``
 and generates a file called ``rotConstsData_C``, which contains the rotational constants of
 the clusters sorted according to their energies.
 
-Screen for unique structures.
+Now, screen for unique structures.
 
 .. code-block:: bash
 
