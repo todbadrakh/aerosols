@@ -8,8 +8,8 @@ Gibbs free energies. So, we will
 further optimize the geometries of the configurations at the M08-HX/MG3S level of
 theory.
 
-At this point, you should be in the output folder inside the small-basis
-directory ``/home/username/gly-h2o/QM/m08hx-sb``. Copy the 
+At this point, you should be in the small-basis directory
+``/home/username/gly-h2o/QM/m08hx-sb``. Copy the 
 ``uniqueStructures-sb.data`` file to the large-basis calculation directory and change
 directory to the large-basis folder.
 
