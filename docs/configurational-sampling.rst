@@ -56,7 +56,7 @@ use a pool size of 100 configurations and run the genetic algorithm for 20,000 i
 Copy and paste the following into a file called ``gly-h2o.ogo``:
 
 .. code-block:: none
-   :caption: :caption: /home/username/gly-h2o/GA/gly-h2o.ogo
+   :caption: /home/username/gly-h2o/GA/gly-h2o.ogo
 
    ###OGOLEM###
    <GEOMETRY>
