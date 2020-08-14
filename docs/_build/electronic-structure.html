@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>High-Level Electronic Energies &#8212; aerosols 0.2.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Protocol" href="thermodynamics.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="thermodynamics.html" title="Protocol"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.2.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">High-Level Electronic Energies</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="high-level-electronic-energies">
+<h1>High-Level Electronic Energies<a class="headerlink" href="#high-level-electronic-energies" title="Permalink to this headline">¶</a></h1>
+<p>The electronic energies used in calculating the Gibbs free energies of formation of gas
+phase molecular clusters can be computed at much higher levels of theory compared to
+density-functional theory. In particular, explicitly-correlated, correlation-corrected
+wavefunction-based methods such as
+<a class="reference external" href="https://pubs.rsc.org/en/content/articlelanding/2008/CP/b803704n#!divAbstract">CCSD(T)-F12</a>
+can be employed. These methods are computationally very costly and scale poorly with system
+size due to the many mathematical operations involved in solving the Schrodinger equation.
+Various mathematical tricks have been employed to reduce the computational cost of these
+calculation, resulting in methods such as RI-MP2-F12 and DLPNO-CCSD(T)-F12. Detailed
+information can be found
+<a class="reference external" href="https://pubs-rsc-org.libproxy.furman.edu/en/content/articlelanding/2008/CP/b808067b#!divAbstract">here</a>.
+These methods are implemented in ORCA 4.2.1 and are available on Marcy and Skylight.</p>
+<div class="section" id="the-orca-module">
+<h2>The ORCA Module<a class="headerlink" href="#the-orca-module" title="Permalink to this headline">¶</a></h2>
+<p>ORCA 4.2.1 is implemented as an <a class="reference external" href="http://modules.sourceforge.net/">envorinmental module</a>
+on Marcy and Skylight. In order to use ORCA 4.2.1, load the module with the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">orca</span><span class="o">/</span><span class="mf">4.2</span><span class="o">.</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Now, the program <code class="docutils literal notranslate"><span class="pre">orca</span></code> and run script <code class="docutils literal notranslate"><span class="pre">run-orca-4.2.1.csh</span></code> are available in your
+command line environment. Generally, one would create a submit script in the form of a
+<code class="docutils literal notranslate"><span class="pre">.pbs</span></code> file on Marcy and a <code class="docutils literal notranslate"><span class="pre">.slurm</span></code> file on Skylight containing instructions which
+use the <code class="docutils literal notranslate"><span class="pre">orca</span></code> and <code class="docutils literal notranslate"><span class="pre">run-orca-4.2.1.csh</span></code> program and script.</p>
+</div>
+<div class="section" id="the-submit-script">
+<h2>The Submit Script<a class="headerlink" href="#the-submit-script" title="Permalink to this headline">¶</a></h2>
+<p>A template submit script can be found in <code class="docutils literal notranslate"><span class="pre">/home/software_test/orca</span></code> and can be used
+as a starting point for setting up new calculations. On Marcy, the PBS submit script
+<code class="docutils literal notranslate"><span class="pre">orca.pbs</span></code> is</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/home/software_test/orca/orca.pbs</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/tcsh</span>
+<span class="c1">#PBS -q mercury</span>
+<span class="c1">#PBS -l nodes=1:ppn=_NUMBER_OF_PROCESSORS_</span>
+<span class="c1">#PBS -l mem=_MEMORY_</span>
+<span class="c1">#PBS -l walltime=_WALLTIME_</span>
+<span class="c1">#PBS -j oe</span>
+<span class="c1">#PBS -e _INPUT_</span>
+<span class="c1">#PBS -N _INPUT_</span>
+<span class="c1">#PBS -V</span>
+
+setenv FILE _INPUT_
+
+<span class="nb">source</span> ~/.login                     <span class="c1"># loading default user environment</span>
+<span class="nb">set</span> <span class="nb">echo</span>                            <span class="c1"># toggle printing</span>
+module purge                        <span class="c1"># clear environment modules</span>
+module load orca/4.2.1              <span class="c1"># load ORCA 4.2.1</span>
+<span class="nb">cd</span> <span class="nv">$PBS_O_WORKDIR</span>                   <span class="c1"># go to working/submit directory</span>
+
+run-orca-4.2.1.csh <span class="nv">$FILE</span> <span class="nv">$PBS_JOBID</span> <span class="c1"># run ORCA 4.2.1 using the input file $FILE and scratch directory $PBS_JOBID</span>
+</pre></div>
+</div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">_MEMORY_</span></code>, <code class="docutils literal notranslate"><span class="pre">_NUMBER_OF_PROCESSORS_</span></code>, <code class="docutils literal notranslate"><span class="pre">_WALLTIME_</span></code>, and <code class="docutils literal notranslate"><span class="pre">_INPUT_</span></code> are defined
+by the user. Note that <code class="docutils literal notranslate"><span class="pre">_NUMBER_OF_PROCESSORS_</span></code> must match the <code class="docutils literal notranslate"><span class="pre">nproc</span></code> parameter in the ORCA input
+file.</p>
+<p>On Skylight, the SLURM submit script <code class="docutils literal notranslate"><span class="pre">orca.slurm</span></code> is</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/home/software_test/orca/orca.slurm</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#SBATCH -p stdmem</span>
+<span class="c1">#SBATCH --nodes=1</span>
+<span class="c1">#SBATCH --ntasks-per-node=_NUMBER_OF_PROCESSORS_</span>
+<span class="c1">#SBATCH --mem=_MEMORY_</span>
+<span class="c1">#SBATCH -t _WALLTIME_</span>
+<span class="c1">#SBATCH --export=ALL</span>
+
+setenv FILE _INPUT_
+
+<span class="nb">source</span> ~/.login                     <span class="c1"># loading default user environment</span>
+<span class="nb">set</span> <span class="nb">echo</span>                            <span class="c1"># toggle printing</span>
+module purge                        <span class="c1"># clear environment modules</span>
+module load orca/4.2.1              <span class="c1"># load ORCA 4.2.1</span>
+<span class="nb">cd</span> <span class="nv">$SLURM_SUBMIT_DIR</span>                <span class="c1"># go to working/submit directory</span>
+
+run-orca-4.2.1.csh <span class="nv">$FILE</span> <span class="nv">$SLURM_JOBID</span> <span class="c1"># run ORCA 4.2.1 using the input file $FILE and scratch directory $PBS_JOBID</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-orca-input-file">
+<h2>The ORCA Input File<a class="headerlink" href="#the-orca-input-file" title="Permalink to this headline">¶</a></h2>
+<p>Template input files for CCSD(T)-F12, DLPNO-CCSD(T)-F12, and RI-MP2-F12 methods can be found in
+<code class="docutils literal notranslate"><span class="pre">/home/software_test/orca</span></code>. Regardless of the computational method, all input files have the following
+general structure:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">/home/software_test/orca/template.inp</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>! _METHOD_ _BASIS_ VeryTightSCF
+
+%pal
+  nproc _NUMBER_OF_PROCESSORS_
+end
+
+* xyz 0 1
+_ATOMIC_COORDINATES_
+*
+</pre></div>
+</div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">_METHOD_</span></code>, <code class="docutils literal notranslate"><span class="pre">_BASIS_</span></code>, <code class="docutils literal notranslate"><span class="pre">_NUMBER_OF_PROCESSORS_</span></code>, and <code class="docutils literal notranslate"><span class="pre">_ATOMIC_COORDINATES_</span></code> are defined by
+the user. The unique lines of each template input file are as follows:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">/home/software_test/orca/dlpno-ccsdt-avxz.inp</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>! DLPNO-CCSD(T) aug-cc-pV_X_Z aug-cc-pV_X_Z/C VeryTightSCF
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">/home/software_test/orca/dlpno-ccsdt-f12-vxz.inp</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>! DLPNO-CCSD(T)-F12 cc-pV_X_Z-F12 cc-pV_X_Z-F12-CABS cc-pV_X_Z/C VeryTightSCF
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">/home/software_test/orca/ri-mp2-f12-vxz.inp</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>! F12-RI-MP2 cc-pV_X_Z-F12 cc-pV_X_Z-F12-CABS cc-pV_X_Z/C VeryTightSCF
+</pre></div>
+</div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">_x_</span></code> is defined by the user.</p>
+</div>
+<div class="section" id="an-example-calculation">
+<h2>An Example Calculation<a class="headerlink" href="#an-example-calculation" title="Permalink to this headline">¶</a></h2>
+<p>Let us calculate the energy of water at the DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory as an exercise. First,
+log into Marcy, create a working directory called <code class="docutils literal notranslate"><span class="pre">orca-example</span></code> and change directory to the new folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ssh username@marcy.furman.edu
+Last login: Thu Aug <span class="m">13</span> <span class="m">13</span>:05:36 <span class="m">2020</span> from <span class="m">10</span>.101.80.1
+        +-+-+-+-+-+-+-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+
+        <span class="p">|</span>    <span class="p">|</span>M<span class="p">|</span>A<span class="p">|</span>R<span class="p">|</span>C<span class="p">|</span>Y<span class="p">|</span> @       MERCURY Consortium    <span class="p">|</span>
+             +-+-+-+-+-+-+-++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+Ganglia -    http://marcy.furman.edu/ganglia/
+WebMO -      http://marcy.furman.edu/webmo.html      <span class="o">(</span>mercuryuser:marcy<span class="o">)</span>
+
+UPDATES:
+
+<span class="m">02</span>/08/15 - NEW queue rules are implemented
+  See http://marcy.furman.edu/wiki/doku.php/start?<span class="p">&amp;</span><span class="c1">#running_calculations for details</span>
+  If you submit to the <span class="s1">&#39;mercury&#39;</span> queue requesting the necessary resources
+  <span class="o">(</span><span class="nv">walltime</span><span class="o">=</span>x:x:x, <span class="nv">nodes</span><span class="o">=</span>x:ppn<span class="o">=</span>x, <span class="nv">mem</span><span class="o">=</span>xGB<span class="o">)</span>, the job will be routed to the best queue.
+
+<span class="m">08</span>/15/14 - Example runs and benchmarks are compiled at ~software_test
+        or online at http://marcy.furman.edu/~software_test
+
+Send any support requests to support@mercuryconsortium.org
+$ mkdir orca-example
+$ <span class="nb">cd</span> orca-example
+$ <span class="nb">pwd</span>
+/home/username/orca-example
+</pre></div>
+</div>
+<p>Now, create an input file for the calculation called <code class="docutils literal notranslate"><span class="pre">example.inp</span></code> with the following contents:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">example.inp</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>! DLPNO-CCSD(T)-F12 cc-pVTZ-F12 cc-pVTZ-F12-CABS cc-pVTZ/C VeryTightSCF PModel
+
+%pal
+  nproc 4
+end
+
+* xyz 0 1
+  O  0.000000000  0.000000000  0.369372944
+  H  0.783975899  0.000000000 -0.184686472
+  H -0.783975899  0.000000000 -0.184686472
+*
+</pre></div>
+</div>
+</div>
+<p>This input file requests a DLPNO-CCSD(T)-F12/cc-pVTZ-F12 single point calculation using the
+cc-pVTZ-F12-CABS and cc-pVTZ/C auxiliary basis sets and 4 CPUs. Now we need a PBS submit script to
+actually run the calculation.</p>
+<p>Create a submit script called <code class="docutils literal notranslate"><span class="pre">example.pbs</span></code> with the following contents:</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">example.pbs</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/bin/tcsh
+#PBS -q mercury
+#PBS -l mem=8gb
+#PBS -l nodes=1:ppn=4
+#PBS -l walltime=2:00:00
+#PBS -j oe
+#PBS -e example
+#PBS -N example
+#PBS -V
+
+setenv FILE example
+
+source ~/.login
+set echo
+module purge
+module load orca/4.2.1
+cd $PBS_O_WORKDIR
+
+run-orca-4.2.1.csh $FILE $PBS_JOBID
+</pre></div>
+</div>
+</div>
+<p>This script requests 4 CPUs and 8GB RAM for 2:00:00 hours for a job named <code class="docutils literal notranslate"><span class="pre">example</span></code>. Now submit
+the calculation using the <code class="docutils literal notranslate"><span class="pre">qsub</span></code> command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qsub example.pbs
+</pre></div>
+</div>
+<p>This calculation will complete quickly because water is a small molecule and generate an output file
+called <code class="docutils literal notranslate"><span class="pre">example.out</span></code>. The final electronic energy can be extracted with a <code class="docutils literal notranslate"><span class="pre">grep</span></code> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ grep <span class="s1">&#39;FINAL SINGLE POINT ENERGY&#39;</span> example.out
+example.out:FINAL SINGLE POINT ENERGY       -76.367027678417
+</pre></div>
+</div>
+<p>Thus, the final result tells us that the electronic energy of water is -76.367027678417 Ha at the
+DLPNO-CCSD(T)-F12/cc-pVTZ-F12 level of theory.</p>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">High-Level Electronic Energies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-orca-module">The ORCA Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-submit-script">The Submit Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-orca-input-file">The ORCA Input File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#an-example-calculation">An Example Calculation</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="thermodynamics.html" title="Protocol"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.2.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">High-Level Electronic Energies</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+    </div>
+  </body>
+</html>

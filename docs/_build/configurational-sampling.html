@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Genetic Algorithm-Based Configurational Sampling &#8212; aerosols 0.2.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Rough Quantum Mechanical Geometry Refinement" href="small-basis-refinement.html" />
+    <link rel="prev" title="0. Set Up" href="set-up.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="small-basis-refinement.html" title="2. Rough Quantum Mechanical Geometry Refinement"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="set-up.html" title="0. Set Up"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="protocol.html" accesskey="U">Protocol</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">1. Genetic Algorithm-Based Configurational Sampling</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="genetic-algorithm-based-configurational-sampling">
+<h1>1. Genetic Algorithm-Based Configurational Sampling<a class="headerlink" href="#genetic-algorithm-based-configurational-sampling" title="Permalink to this headline">¶</a></h1>
+<p>The goal here is to obtain a list of configurations, and their associated <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> files. To
+do this, we must first obtain the optimized geometries of the water molecule and the glycine
+molecule.</p>
+<p>Change directory to the genetic algorithm directory.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">pwd</span>
+/home/username/gly-h2o
+$ <span class="nb">cd</span> GA
+$ <span class="nb">pwd</span>
+/home/username/gly-h2o/GA
+</pre></div>
+</div>
+<p>This calculation requires the geometry of each molecular species (monomer) in <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> format.
+Generally, one would optimize each monomer geometry in a separate preparatory step; however,
+we will provide optimized geometries for this tutorial.</p>
+<p>Copy and paste the following into a file called <code class="docutils literal notranslate"><span class="pre">h2o.xyz</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">/home/username/gly-h2o/GA/h2o.xyz</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>3
+
+O          0.00000        0.00000        0.11536
+H         -0.00000        0.76308       -0.46145
+H         -0.00000       -0.76308       -0.46145
+</pre></div>
+</div>
+</div>
+<p>Copy and paste the following into a file called <code class="docutils literal notranslate"><span class="pre">gly.xyz</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">/home/username/gly-h2o/GA/gly.xyz</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>10
+
+O          1.64695       -0.64686       -0.00003
+O          0.56490        1.30640       -0.00001
+N         -1.95271        0.01325       -0.00003
+C         -0.72105       -0.73514        0.00002
+C          0.53881        0.10923        0.00009
+H         -0.67599       -1.39711       -0.87200
+H         -0.67606       -1.39712        0.87203
+H         -1.99594        0.62049       -0.80956
+H         -1.99601        0.62047        0.80951
+H          2.41159       -0.06038       -0.00008
+</pre></div>
+</div>
+</div>
+<p>This calculation also requires an input file for OGOLEM in <code class="docutils literal notranslate"><span class="pre">.ogo</span></code> format. This file describes
+the parameters of the configurational sampling run. Detailed descriptions of the input file can
+be found in the <a class="reference external" href="https://www.ogolem.org/manual/">OGOLEM manual</a>. For this tutorial, we will
+use a pool size of 100 configurations and run the genetic algorithm for 20,000 iterations.</p>
+<p>Copy and paste the following into a file called <code class="docutils literal notranslate"><span class="pre">gly-h2o.ogo</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><dt class="field-odd">caption</dt>
+<dd class="field-odd"><p>/home/username/gly-h2o/GA/gly-h2o.ogo</p>
+</dd>
+</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>###OGOLEM###
+&lt;GEOMETRY&gt;
+NumberOfParticles=2
+&lt;MOLECULE&gt;
+MoleculePath=gly.xyz
+MoleculeRepetitions=1
+&lt;/MOLECULE&gt;
+&lt;MOLECULE&gt;
+MoleculePath=h2o.xyz
+MoleculeRepetitions=1
+&lt;/MOLECULE&gt;
+&lt;CHARGES&gt;
+0;0;0
+1;0;0
+&lt;/CHARGES&gt;
+&lt;/GEOMETRY&gt;
+LocOptAlgo=mopac:pm7
+PoolSize=100
+MaxIterLocOpt=100
+NumberOfGlobIterations=20000
+BlowBondDetect=1.4
+BlowInitialBonds=1.4
+BlowFacDissoc=2.5
+InitialFillAlgo=2
+GrowCell=true
+DiversityCheck=fitnessbased:0.00001
+</pre></div>
+</div>
+</div>
+<p>Finally, a submit script is required to run the calculation. This file describes the
+requested resources and contains shell commands to run the configurational sampling calculation.
+Since Marcy and Skylight operate different queueing systems (PBS on Marcy and SLURM on Skylight),
+instructions for both clusters are provided below.</p>
+<p>On Marcy, create a file called <code class="docutils literal notranslate"><span class="pre">ogolem.pbs</span></code> with the following contents:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">/home/username/gly-h2o/ogolem.pbs</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/tcsh</span>
+<span class="c1">#PBS -q mercury</span>
+<span class="c1">#PBS -l nodes=1:ppn=16</span>
+<span class="c1">#PBS -l mem=30gb</span>
+<span class="c1">#PBS -l walltime=48:00:00</span>
+<span class="c1">#PBS -j oe</span>
+<span class="c1">#PBS -V</span>
+
+setenv FILE gly-h2o          <span class="c1"># assign the OGOLEM input file name to $FILE</span>
+
+<span class="nb">source</span> ~/.login              <span class="c1"># load default user environment</span>
+<span class="nb">set</span> <span class="nb">echo</span>                     <span class="c1"># toggle printing</span>
+
+run-ogolem.csh <span class="nv">$FILE</span>.ogo <span class="m">16</span>  <span class="c1"># run the OGOLEM calculation</span>
+</pre></div>
+</div>
+</div>
+<p>On Skylight, create a file called <code class="docutils literal notranslate"><span class="pre">ogolem.slurm</span></code> with the following contents:</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">/home/username/gly-h2o/ogolem.slurm</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/tcsh</span>
+<span class="c1">#SBATCH -p stdmem</span>
+<span class="c1">#SBATCH --nodes=1</span>
+<span class="c1">#SBATCH --ntasks-per-node=20</span>
+<span class="c1">#SBATCH --mem=48G</span>
+<span class="c1">#SBATCH -t 48:00:00</span>
+<span class="c1">#SBATCH --export=ALL</span>
+
+setenv FILE gly-h2o          <span class="c1"># assign OGOLEM input file name to $FILE</span>
+
+<span class="nb">source</span> ~/.login              <span class="c1"># load default user environment</span>
+<span class="nb">set</span> <span class="nb">echo</span>                     <span class="c1"># toggle printing</span>
+
+run-ogolem.csh <span class="nv">$FILE</span>.ogo <span class="m">20</span>  <span class="c1"># run the OGOLEM calculation</span>
+</pre></div>
+</div>
+</div>
+<p>The submit scripts have been written to use the optimal resources for each cluster, so the
+number of processors and memory requests are different between the <code class="docutils literal notranslate"><span class="pre">.pbs</span></code> and <code class="docutils literal notranslate"><span class="pre">.slurm</span></code>
+files. We finally have all the required files.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ls
+gly-h2o.ogo  gly.xyz  h2o.xyz  ogolem.slurm
+</pre></div>
+</div>
+<p>Submit the calculation to the queue and wait for its completion.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sbatch ogolem.slurm
+Submitted batch job <span class="c1">###</span>
+</pre></div>
+</div>
+<p>Once the job finishes, one will find a new directory containing <code class="docutils literal notranslate"><span class="pre">.xyz</span></code> files and two OGOLEM
+output files and a SLURM output file. The lowest energy configurations of the cluster have
+been identified at the semiempirical level of theory and their geometries have been saved in the
+named <code class="docutils literal notranslate"><span class="pre">rankXindividualY.xyz</span></code> where <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> are numbers. The lowest energy cluster has
+<code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">0</span></code>. Now, our task is to consolidate these results into a form which can be used in the
+next steps. To this end we will check for duplicate structures and generate a list of unique
+structures based on their rotational constants.</p>
+<p>Change directory to the output folder and call the <code class="docutils literal notranslate"><span class="pre">getRotConsts-GA.csh</span></code> script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> gly-h2o
+$ getRotConsts-GA.csh <span class="m">13</span> <span class="m">0</span> <span class="m">99</span>
+</pre></div>
+</div>
+<p>This generates an output file called <code class="docutils literal notranslate"><span class="pre">rotConstsData_C</span></code> containing a list of the rotational
+constants of each configuration sorted according to their energies. Finally, generate a
+list of unique configurations.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ similarityAnalysis.py pm7 rotConstsData_C
+</pre></div>
+</div>
+<p>This generates an output file called <code class="docutils literal notranslate"><span class="pre">uniqueStructures-pm7.data</span></code> containing the unique
+configurations found at the PM7 semiempirical level of theory.</p>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="protocol.html">Protocol</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="set-up.html">0. Set Up</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Genetic Algorithm-Based Configurational Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="small-basis-refinement.html">2. Rough Quantum Mechanical Geometry Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="large-basis-refinement.html">3. Detailed Quantum Mechanical Geometry Refinement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thermodynamics.html">4. Calculation of Thermodynamic Quantities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="electronic-structure.html">High-Level Electronic Energies</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="small-basis-refinement.html" title="2. Rough Quantum Mechanical Geometry Refinement"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="set-up.html" title="0. Set Up"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">aerosols 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="protocol.html" >Protocol</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">1. Genetic Algorithm-Based Configurational Sampling</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright .
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+    </div>
+  </body>
+</html>
