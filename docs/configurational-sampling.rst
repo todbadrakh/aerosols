@@ -1,9 +1,9 @@
 Genetic Algorithm-Based Configurational Sampling
 ------------------------------------------------
 
-The goal here is to obtain a list of configurations, and their associated ``.xyz`` files. To
-do this, we must first obtain the optimized geometries of the water molecule and the glycine
-molecule.
+The goal here is to obtain a list of configurations by determining the lowest energy geometries
+of the cluster. To do this, we use the OGOLEM program to run a genetic algorithm which can
+identify these low-energy structures.
 
 Change directory to the genetic algorithm directory.
 
