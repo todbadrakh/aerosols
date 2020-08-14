@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-============
-aerosols
-============
+======================
+aerosols Documentation
+======================
 
 This document describes the computational methodology used in the 
 `Shields <https://www.furman.edu/people/george-c-shields>`_ Lab to compute 
@@ -34,6 +34,7 @@ possible clusters are calculated at a high level of accuracy to produce meaningf
 data.
 
 .. toctree::
+   :maxdepth: 2
    :caption: Contents
 
    prerequisites

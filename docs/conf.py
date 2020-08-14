@@ -18,9 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'aerosols'
-copyright = '2020, Tuguldur T. Odbadrakh'
 author = 'Tuguldur T. Odbadrakh'
-release = '0.1.1'
+release = '0.2.1'
 
 # -- General configuration ---------------------------------------------------
 master_doc = 'index'
