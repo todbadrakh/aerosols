@@ -18,7 +18,7 @@ directory to the large-basis folder.
    $ cp uniqueStructures-sb.data ../m08hx-mg3s/.
    $ cd ../m08hx-mg3s
 
-Now, use large-basis run script ``run-m08hx-mg3s.csh`` to submit the geometry optimization
+Now, use the large-basis run script ``run-m08hx-mg3s.csh`` to submit the geometry optimization
 jobs. This script automatically reads the ``uniqueStructures-sb.data`` file and
 generates a Gaussian 16 input file for each structure and submits the calculations to
 the queue in batches.
