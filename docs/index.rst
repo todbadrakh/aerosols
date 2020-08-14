@@ -34,7 +34,7 @@ possible clusters are calculated at a high level of accuracy to produce meaningf
 data.
 
 .. toctree::
-   :caption: aerosols Manual
+   :caption: Contents
 
    prerequisites
    protocol
