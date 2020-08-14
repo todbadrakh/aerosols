@@ -37,8 +37,8 @@ data.
    :caption: Contents
 
    prerequisites
-   protocol/index
-   protocol/set-up
-   protocol/configurational-sampling
+   protocol
+   set-up
+   configurational-sampling
    electronic-structure
 
