@@ -173,3 +173,5 @@ list of unique configurations.
 This generates an output file called ``uniqueStructures-pm7.data`` containing the unique
 configurations found at the PM7 semiempirical level of theory.
 
+.. toctree::
+   :hidden:
