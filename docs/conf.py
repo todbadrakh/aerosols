@@ -19,7 +19,7 @@
 
 project = 'aerosols'
 author = 'Tuguldur T. Odbadrakh'
-release = '0.2.1'
+release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------
 master_doc = 'index'
