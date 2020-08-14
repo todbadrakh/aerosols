@@ -40,7 +40,27 @@ of 10.
    $ run-m08hx-sb.csh uniqueStructures-pm7.data sb stdmem 10
 
 This will generate Gaussian 16 input files named ``gly-h2o-#-#-m08hx-sb.com``, which will
-subsequently generate their associated output files named ``gly-h2o-#-#-m08hx-sb.log``.
+subsequently generate their associated output files named ``gly-h2o-#-#-m08hx-sb.log``. A set
+of submit scripts are generated as ``run-#.pbs`` on Marcy and ``run-#.slurm`` on Skylight.
+
+Once all jobs are completed, generate a list of rotational constants.
+
+.. code-block:: bash
+
+   $ getRotConsts-dft-sb.csh m08hx 13
+
+This script takes the density functional (``m08hx``) and number of atoms (``13``) as input
+and generates a file called ``rotConstsData_C``, which contains the rotational constants of
+the clusters sorted according to their energies.
+
+Screen for unique structures.
+
+.. code-block:: bash
+
+   $ similarityAnalysis.py sb rotConstsData_C
+
+This script generates a file called ``uniqueStructures-sb.data`` which contains a list
+of the unique structures and their rotational constants.
 
 .. toctree::
 
