@@ -23,10 +23,6 @@ author = 'Tuguldur T. Odbadrakh'
 release = '0.1.1'
 
 # -- General configuration ---------------------------------------------------
-templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
-#html_theme = 'default'
-html_static_path = ['_static']
-extensions_path = ['_extensions']
-extensions = ['sphinxcontrib.fulltoc']
+master_doc = 'index'
+html_theme = 'default'
+html_sidebars = { '**': ['globaltoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html'] }
