@@ -35,9 +35,12 @@ On Marcy, submit the small-basis geometry optimizations to the mercury queue in 
 On Skylight, submit the small-basis geometry optimizations to the stdmem queue in batches
 of 10.
 
-.. code-blcok:: bash
+.. code-block:: bash
 
    $ run-m08hx-sb.csh uniqueStructures-pm7.data sb stdmem 10
+
+This will generate Gaussian 16 input files named ``gly-h2o-#-#-m08hx-sb.com``, which will
+subsequently generate their associated output files named ``gly-h2o-#-#-m08hx-sb.log``.
 
 .. toctree::
 
